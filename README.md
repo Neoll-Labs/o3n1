@@ -35,10 +35,10 @@ expected output
 # ignite boilerplate
 ```shell
 
-ignite scaffold module store
+#ignite scaffold module statether
 
 ignite scaffold message storeStatus retriveStatus to:string from:string \
---module store \
+--module statether \
 --response capturedX:int
 
 ```
