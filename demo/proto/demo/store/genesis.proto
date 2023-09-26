@@ -1,0 +1,12 @@
+syntax = "proto3";
+package demo.store;
+
+import "gogoproto/gogo.proto";
+import "demo/store/params.proto";
+
+option go_package = "demo/x/store/types";
+
+// GenesisState defines the store module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+}
