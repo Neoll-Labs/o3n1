@@ -1,0 +1,47 @@
+accounts:
+  - name: alice
+    coins: ['20000token', '200000000stake']
+    mnemonic: ramp supreme cargo review change various throw air figure humble soft steel slam pole betray inhale already dentist enough away office apple sample glue
+  - name: bob
+    coins: ['10000token', '100000000stake']
+    mnemonic: ramp cargo supreme review change various throw air figure humble soft steel slam pole betray inhale already dentist enough away office apple sample glue
+  - name: bobby
+    coins: [ '20000token', '200000000stake' ]
+    mnemonic: cargo ramp supreme review change various throw air figure humble soft steel slam pole betray inhale already dentist enough away office apple sample glue
+validators:
+  - name: alice
+    bonded: '100000000stake'
+    home: "~/.mychain"
+    app:
+      pruning: "nothing"
+    config:
+      moniker: "mychain"
+    client:
+      output: "json"
+build:
+  main: cmd/demo/cmd
+  binary: "demochain"
+  ldflags: [ "-X main.Version=development", "-X main.Date=01/05/2023T00:00" ]
+  proto:
+    path: "proto"
+    third_party_paths: ["3rd_party/proto"]
+faucet:
+  name: faucet
+  coins: [ "100token", "5foo" ]
+  coins_max: [ "2000token", "1000foo" ]
+  port: 4500
+  rate_limit_window: 3600
+genesis:
+  app_state:
+    staking:
+      params:
+        bond_denom: "denom"
+client:
+  openapi:
+    path: "docs/static/openapi.yml"
+  typescript:
+    path: "ts-client"
+  composables:
+    path: "vue/src/composables"
+  hooks:
+    path: "react/src/hooks"
