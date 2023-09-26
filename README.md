@@ -9,7 +9,7 @@ golang
 
 init `demoChain`
 ```shell
-ignite scaffold chain example
+ignite scaffold chain demo 
 ```
 expect output
 ```shell
