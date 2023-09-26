@@ -1,7 +1,0 @@
-syntax = "proto3";
-package demo.demo;
-
-option go_package = "demo/x/demo/types";
-
-// Msg defines the Msg service.
-service Msg {}

@@ -9,21 +9,19 @@ golang
 
 init `demoChain`
 ```shell
-ignite scaffold chain demo 
+ignite scaffold chain statether 
 ```
 expect output
 ```shell
-⭐️ Successfully created a new blockchain 'demo'.
+⭐️ Successfully created a new blockchain 'statether'.
 👉 Get started with the following commands:
 
- % cd demo
- % ignite chain serve
 ```
 
 start the blockchain with
 ```shell
- % cd demo
- % ignite chain serve
+cd statether
+ignite chain serve
 ```
 
 expected output
