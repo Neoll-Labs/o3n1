@@ -37,8 +37,17 @@ expected output
 
 #ignite scaffold module statether
 
-ignite scaffold message storeStatus retriveStatus to:string from:string \
---module statether \
---response capturedX:int
+ignite scaffold type ethaddress-storage-position address:string block:uint nonce:uint storage-position:uint 
 
+# add address
+ignite scaffold message add-address address:string --response id
+
+# save the storage-position for an address
+ignite scaffold message save-ethaddress-storage-position data:EthaddressStoragePosition --response id
+
+#get the storage-position for an address
+ignite scaffold query get-ethaddress-storage-position address:string --response data:EthaddressStoragePosition
+
+# display addresses information
+ignite scaffold query fetch-ethaddresses-storage-positiona  --response data:EthaddressStoragePosition --paginated
 ```
