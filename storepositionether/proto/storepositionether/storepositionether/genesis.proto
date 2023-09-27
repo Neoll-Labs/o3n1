@@ -1,12 +1,16 @@
 syntax = "proto3";
+
 package storepositionether.storepositionether;
 
 import "gogoproto/gogo.proto";
 import "storepositionether/storepositionether/params.proto";
+import "storepositionether/storepositionether/eth_address.proto";
 
 option go_package = "storepositionether/x/storepositionether/types";
 
 // GenesisState defines the storepositionether module's genesis state.
 message GenesisState {
-  Params params = 1 [(gogoproto.nullable) = false];
+           Params     params         = 1 [(gogoproto.nullable) = false];
+  repeated EthAddress ethAddressList = 2 [(gogoproto.nullable) = false];
 }
+
