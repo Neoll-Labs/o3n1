@@ -1,7 +1,19 @@
 syntax = "proto3";
+
 package statether.statether;
 
 option go_package = "statether/x/statether/types";
 
 // Msg defines the Msg service.
-service Msg {}
+service Msg {
+  rpc AddAddress (MsgAddAddress) returns (MsgAddAddressResponse);
+}
+message MsgAddAddress {
+  string creator = 1;
+  string address = 2;
+}
+
+message MsgAddAddressResponse {
+  string id = 1;
+}
+
