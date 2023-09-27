@@ -1,0 +1,12 @@
+syntax = "proto3";
+package storepositionether.storepositionether;
+
+import "gogoproto/gogo.proto";
+import "storepositionether/storepositionether/params.proto";
+
+option go_package = "storepositionether/x/storepositionether/types";
+
+// GenesisState defines the storepositionether module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+}
