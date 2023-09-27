@@ -1,7 +1,19 @@
 syntax = "proto3";
+
 package storepositionether.storepositionether;
 
 option go_package = "storepositionether/x/storepositionether/types";
 
 // Msg defines the Msg service.
-service Msg {}
+service Msg {
+  rpc AddAddress (MsgAddAddress) returns (MsgAddAddressResponse);
+}
+message MsgAddAddress {
+  string creator    = 1;
+  string ethAddress = 2;
+}
+
+message MsgAddAddressResponse {
+  string ethAddress = 1;
+}
+
