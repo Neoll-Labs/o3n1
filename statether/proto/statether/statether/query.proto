@@ -24,6 +24,12 @@ service Query {
     option (google.api.http).get = "/statether/statether/get_ethaddress_storage_position/{address}";
   
   }
+  
+  // Queries a list of FetchEthaddressesStoragePositiona items.
+  rpc FetchEthaddressesStoragePositiona (QueryFetchEthaddressesStoragePositionaRequest) returns (QueryFetchEthaddressesStoragePositionaResponse) {
+    option (google.api.http).get = "/statether/statether/fetch_ethaddresses_storage_positiona";
+  
+  }
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
@@ -41,5 +47,14 @@ message QueryGetEthaddressStoragePositionRequest {
 
 message QueryGetEthaddressStoragePositionResponse {
   EthaddressStoragePosition data = 1;
+}
+
+message QueryFetchEthaddressesStoragePositionaRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryFetchEthaddressesStoragePositionaResponse {
+  EthaddressStoragePosition              data       = 1;
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
