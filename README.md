@@ -62,7 +62,7 @@ ignite scaffold message disable-address creator ethAddress --response ethAddress
     --module storepositionether
 
 # save the storage-position for an address
-ignite scaffold message save-ethaddress-storage-position data:EthaddressStoragePosition --response ethAddress \
+ignite scaffold message save-ethaddress-storage-position ethAddress block:uint nonce:uint storage-position:uint --response ethAddress \
     --module storepositionether
 
 #get the storage-position for an address

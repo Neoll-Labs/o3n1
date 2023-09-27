@@ -24,6 +24,6 @@ func SimulateMsgSaveEthaddressStoragePosition(
 
 		// TODO: Handling the SaveEthaddressStoragePosition simulation
 
-		return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "SaveEthaddressStoragePosition simulation not implemented"), nil, nil
+		return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "SaveEthaddressStoragePosition2 simulation not implemented"), nil, nil
 	}
 }

@@ -1,19 +1,21 @@
 package types
 
 import (
-	"cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-const TypeMsgSaveEthaddressStoragePosition = "save_ethaddress_storage_position"
+const TypeMsgSaveEthaddressStoragePosition = "save_ethaddress_storage_position_2"
 
 var _ sdk.Msg = &MsgSaveEthaddressStoragePosition{}
 
-func NewMsgSaveEthaddressStoragePosition(creator string, data *EthaddressStoragePosition) *MsgSaveEthaddressStoragePosition {
+func NewMsgSaveEthaddressStoragePosition(creator string, ethAddress string, block uint64, nonce uint64, storagePosition uint64) *MsgSaveEthaddressStoragePosition {
 	return &MsgSaveEthaddressStoragePosition{
-		Creator: creator,
-		Data:    data,
+		Creator:         creator,
+		EthAddress:      ethAddress,
+		Block:           block,
+		Nonce:           nonce,
+		StoragePosition: storagePosition,
 	}
 }
 
@@ -43,10 +45,5 @@ func (msg *MsgSaveEthaddressStoragePosition) ValidateBasic() error {
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
-
-	if !isValidEthAddress(msg.Data.EthAddress) {
-		return errors.Wrapf(ErrInvalidEthAddress, "invalid eth address (%s)", msg.Data.EthAddress)
-	}
-
 	return nil
 }

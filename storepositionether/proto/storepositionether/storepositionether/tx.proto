@@ -8,7 +8,7 @@ option go_package = "storepositionether/x/storepositionether/types";
 
 // Msg defines the Msg service.
 service Msg {
-  rpc AddAddress                    (MsgAddAddress                   ) returns (MsgAddAddressResponse                   );
+  rpc AddAddress                     (MsgAddAddress                    ) returns (MsgAddAddressResponse                    );
   rpc SaveEthaddressStoragePosition (MsgSaveEthaddressStoragePosition) returns (MsgSaveEthaddressStoragePositionResponse);
 }
 message MsgAddAddress {
@@ -20,9 +20,13 @@ message MsgAddAddressResponse {
   string ethAddress = 1;
 }
 
+
 message MsgSaveEthaddressStoragePosition {
-  string                    creator = 1;
-  EthaddressStoragePosition data    = 2;
+  string creator         = 1;
+  string ethAddress      = 2;
+  uint64 block           = 3;
+  uint64 nonce           = 4;
+  uint64 storagePosition = 5;
 }
 
 message MsgSaveEthaddressStoragePositionResponse {
