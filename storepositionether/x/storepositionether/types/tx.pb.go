@@ -123,9 +123,109 @@ func (m *MsgAddAddressResponse) GetEthAddress() string {
 	return ""
 }
 
+type MsgSaveEthaddressStoragePosition struct {
+	Creator string                     `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	Data    *EthaddressStoragePosition `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+}
+
+func (m *MsgSaveEthaddressStoragePosition) Reset()         { *m = MsgSaveEthaddressStoragePosition{} }
+func (m *MsgSaveEthaddressStoragePosition) String() string { return proto.CompactTextString(m) }
+func (*MsgSaveEthaddressStoragePosition) ProtoMessage()    {}
+func (*MsgSaveEthaddressStoragePosition) Descriptor() ([]byte, []int) {
+	return fileDescriptor_839c8d1304f303b7, []int{2}
+}
+func (m *MsgSaveEthaddressStoragePosition) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgSaveEthaddressStoragePosition) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgSaveEthaddressStoragePosition.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgSaveEthaddressStoragePosition) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgSaveEthaddressStoragePosition.Merge(m, src)
+}
+func (m *MsgSaveEthaddressStoragePosition) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgSaveEthaddressStoragePosition) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgSaveEthaddressStoragePosition.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgSaveEthaddressStoragePosition proto.InternalMessageInfo
+
+func (m *MsgSaveEthaddressStoragePosition) GetCreator() string {
+	if m != nil {
+		return m.Creator
+	}
+	return ""
+}
+
+func (m *MsgSaveEthaddressStoragePosition) GetData() *EthaddressStoragePosition {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
+type MsgSaveEthaddressStoragePositionResponse struct {
+	EthAddress string `protobuf:"bytes,1,opt,name=ethAddress,proto3" json:"ethAddress,omitempty"`
+}
+
+func (m *MsgSaveEthaddressStoragePositionResponse) Reset() {
+	*m = MsgSaveEthaddressStoragePositionResponse{}
+}
+func (m *MsgSaveEthaddressStoragePositionResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgSaveEthaddressStoragePositionResponse) ProtoMessage()    {}
+func (*MsgSaveEthaddressStoragePositionResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_839c8d1304f303b7, []int{3}
+}
+func (m *MsgSaveEthaddressStoragePositionResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgSaveEthaddressStoragePositionResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgSaveEthaddressStoragePositionResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgSaveEthaddressStoragePositionResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgSaveEthaddressStoragePositionResponse.Merge(m, src)
+}
+func (m *MsgSaveEthaddressStoragePositionResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgSaveEthaddressStoragePositionResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgSaveEthaddressStoragePositionResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgSaveEthaddressStoragePositionResponse proto.InternalMessageInfo
+
+func (m *MsgSaveEthaddressStoragePositionResponse) GetEthAddress() string {
+	if m != nil {
+		return m.EthAddress
+	}
+	return ""
+}
+
 func init() {
 	proto.RegisterType((*MsgAddAddress)(nil), "storepositionether.storepositionether.MsgAddAddress")
 	proto.RegisterType((*MsgAddAddressResponse)(nil), "storepositionether.storepositionether.MsgAddAddressResponse")
+	proto.RegisterType((*MsgSaveEthaddressStoragePosition)(nil), "storepositionether.storepositionether.MsgSaveEthaddressStoragePosition")
+	proto.RegisterType((*MsgSaveEthaddressStoragePositionResponse)(nil), "storepositionether.storepositionether.MsgSaveEthaddressStoragePositionResponse")
 }
 
 func init() {
@@ -133,20 +233,26 @@ func init() {
 }
 
 var fileDescriptor_839c8d1304f303b7 = []byte{
-	// 208 bytes of a gzipped FileDescriptorProto
+	// 303 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xd2, 0x2b, 0x2e, 0xc9, 0x2f,
 	0x4a, 0x2d, 0xc8, 0x2f, 0xce, 0x2c, 0xc9, 0xcc, 0xcf, 0x4b, 0x2d, 0xc9, 0x48, 0x2d, 0xd2, 0xc7,
 	0x22, 0x54, 0x52, 0xa1, 0x57, 0x50, 0x94, 0x5f, 0x92, 0x2f, 0xa4, 0x8a, 0x29, 0x89, 0xc5, 0x08,
-	0x25, 0x4f, 0x2e, 0x5e, 0xdf, 0xe2, 0x74, 0xc7, 0x94, 0x14, 0xc7, 0x94, 0x94, 0xa2, 0xd4, 0xe2,
-	0x62, 0x21, 0x09, 0x2e, 0xf6, 0xe4, 0xa2, 0xd4, 0xc4, 0x92, 0xfc, 0x22, 0x09, 0x46, 0x05, 0x46,
-	0x0d, 0xce, 0x20, 0x18, 0x57, 0x48, 0x8e, 0x8b, 0x2b, 0xb5, 0x24, 0x03, 0xaa, 0x4e, 0x82, 0x09,
-	0x2c, 0x89, 0x24, 0xa2, 0x64, 0xce, 0x25, 0x8a, 0x62, 0x54, 0x50, 0x6a, 0x71, 0x41, 0x7e, 0x5e,
-	0x71, 0x2a, 0x9a, 0x46, 0x46, 0x74, 0x8d, 0x46, 0x1d, 0x8c, 0x5c, 0xcc, 0xbe, 0xc5, 0xe9, 0x42,
-	0x0d, 0x8c, 0x5c, 0x5c, 0x48, 0x2e, 0x31, 0xd1, 0x23, 0xca, 0x0b, 0x7a, 0x28, 0x96, 0x4a, 0xd9,
-	0x90, 0xa3, 0x0b, 0xe6, 0x54, 0x27, 0xf7, 0x13, 0x8f, 0xe4, 0x18, 0x2f, 0x3c, 0x92, 0x63, 0x7c,
-	0xf0, 0x48, 0x8e, 0x71, 0xc2, 0x63, 0x39, 0x86, 0x0b, 0x8f, 0xe5, 0x18, 0x6e, 0x3c, 0x96, 0x63,
-	0x88, 0xd2, 0xc5, 0x12, 0xd8, 0x15, 0x58, 0x63, 0xa0, 0xb2, 0x20, 0xb5, 0x38, 0x89, 0x0d, 0x1c,
-	0x0b, 0xc6, 0x80, 0x00, 0x00, 0x00, 0xff, 0xff, 0x75, 0x68, 0x13, 0xb1, 0xb7, 0x01, 0x00, 0x00,
+	0x29, 0x77, 0xe2, 0x8c, 0x4d, 0x2d, 0xc9, 0x48, 0x4c, 0x49, 0x29, 0x4a, 0x2d, 0x2e, 0x8e, 0x07,
+	0xc9, 0x26, 0xa6, 0xa7, 0xc6, 0xc3, 0x14, 0x40, 0xec, 0x53, 0xf2, 0xe4, 0xe2, 0xf5, 0x2d, 0x4e,
+	0x77, 0x4c, 0x49, 0x71, 0x84, 0xa8, 0x13, 0x92, 0xe0, 0x62, 0x4f, 0x2e, 0x4a, 0x4d, 0x2c, 0xc9,
+	0x2f, 0x92, 0x60, 0x54, 0x60, 0xd4, 0xe0, 0x0c, 0x82, 0x71, 0x85, 0xe4, 0xb8, 0xb8, 0x52, 0x4b,
+	0x32, 0xa0, 0xea, 0x24, 0x98, 0xc0, 0x92, 0x48, 0x22, 0x4a, 0xe6, 0x5c, 0xa2, 0x28, 0x46, 0x05,
+	0xa5, 0x16, 0x17, 0xe4, 0xe7, 0x15, 0xa7, 0xa2, 0x69, 0x64, 0xc4, 0xd0, 0x38, 0x89, 0x91, 0x4b,
+	0xc1, 0xb7, 0x38, 0x3d, 0x38, 0xb1, 0x2c, 0xd5, 0x15, 0xee, 0xe0, 0x60, 0x88, 0x7b, 0x03, 0xa0,
+	0xce, 0xc5, 0xe3, 0xae, 0x10, 0x2e, 0x96, 0x94, 0xc4, 0x92, 0x44, 0xb0, 0x8b, 0xb8, 0x8d, 0x1c,
+	0xf4, 0x88, 0x0a, 0x41, 0x3d, 0x9c, 0x36, 0x05, 0x81, 0x4d, 0x53, 0xf2, 0xe2, 0xd2, 0x20, 0xe4,
+	0x26, 0x62, 0x3d, 0x68, 0x74, 0x84, 0x89, 0x8b, 0xd9, 0xb7, 0x38, 0x5d, 0xa8, 0x81, 0x91, 0x8b,
+	0x0b, 0x29, 0xa8, 0x4d, 0x88, 0x74, 0x2a, 0x4a, 0xa8, 0x4a, 0xd9, 0x90, 0xa3, 0x0b, 0xee, 0xd4,
+	0x9d, 0x8c, 0x5c, 0xb2, 0xf8, 0x03, 0xda, 0x9d, 0x78, 0xf3, 0xf1, 0x1a, 0x24, 0xe5, 0x4f, 0x25,
+	0x83, 0x60, 0x6e, 0x77, 0x72, 0x3f, 0xf1, 0x48, 0x8e, 0xf1, 0xc2, 0x23, 0x39, 0xc6, 0x07, 0x8f,
+	0xe4, 0x18, 0x27, 0x3c, 0x96, 0x63, 0xb8, 0xf0, 0x58, 0x8e, 0xe1, 0xc6, 0x63, 0x39, 0x86, 0x28,
+	0x5d, 0x2c, 0x69, 0xbf, 0x02, 0x6b, 0x3e, 0xab, 0x2c, 0x48, 0x2d, 0x4e, 0x62, 0x03, 0xa7, 0x7d,
+	0x63, 0x40, 0x00, 0x00, 0x00, 0xff, 0xff, 0xbf, 0x83, 0x12, 0xa6, 0x9d, 0x03, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -162,6 +268,7 @@ const _ = grpc.SupportPackageIsVersion4
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type MsgClient interface {
 	AddAddress(ctx context.Context, in *MsgAddAddress, opts ...grpc.CallOption) (*MsgAddAddressResponse, error)
+	SaveEthaddressStoragePosition(ctx context.Context, in *MsgSaveEthaddressStoragePosition, opts ...grpc.CallOption) (*MsgSaveEthaddressStoragePositionResponse, error)
 }
 
 type msgClient struct {
@@ -181,9 +288,19 @@ func (c *msgClient) AddAddress(ctx context.Context, in *MsgAddAddress, opts ...g
 	return out, nil
 }
 
+func (c *msgClient) SaveEthaddressStoragePosition(ctx context.Context, in *MsgSaveEthaddressStoragePosition, opts ...grpc.CallOption) (*MsgSaveEthaddressStoragePositionResponse, error) {
+	out := new(MsgSaveEthaddressStoragePositionResponse)
+	err := c.cc.Invoke(ctx, "/storepositionether.storepositionether.Msg/SaveEthaddressStoragePosition", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 type MsgServer interface {
 	AddAddress(context.Context, *MsgAddAddress) (*MsgAddAddressResponse, error)
+	SaveEthaddressStoragePosition(context.Context, *MsgSaveEthaddressStoragePosition) (*MsgSaveEthaddressStoragePositionResponse, error)
 }
 
 // UnimplementedMsgServer can be embedded to have forward compatible implementations.
@@ -192,6 +309,9 @@ type UnimplementedMsgServer struct {
 
 func (*UnimplementedMsgServer) AddAddress(ctx context.Context, req *MsgAddAddress) (*MsgAddAddressResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddAddress not implemented")
+}
+func (*UnimplementedMsgServer) SaveEthaddressStoragePosition(ctx context.Context, req *MsgSaveEthaddressStoragePosition) (*MsgSaveEthaddressStoragePositionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SaveEthaddressStoragePosition not implemented")
 }
 
 func RegisterMsgServer(s grpc1.Server, srv MsgServer) {
@@ -216,6 +336,24 @@ func _Msg_AddAddress_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_SaveEthaddressStoragePosition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgSaveEthaddressStoragePosition)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).SaveEthaddressStoragePosition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/storepositionether.storepositionether.Msg/SaveEthaddressStoragePosition",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).SaveEthaddressStoragePosition(ctx, req.(*MsgSaveEthaddressStoragePosition))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Msg_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "storepositionether.storepositionether.Msg",
 	HandlerType: (*MsgServer)(nil),
@@ -223,6 +361,10 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AddAddress",
 			Handler:    _Msg_AddAddress_Handler,
+		},
+		{
+			MethodName: "SaveEthaddressStoragePosition",
+			Handler:    _Msg_SaveEthaddressStoragePosition_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -296,6 +438,78 @@ func (m *MsgAddAddressResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *MsgSaveEthaddressStoragePosition) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgSaveEthaddressStoragePosition) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgSaveEthaddressStoragePosition) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Data != nil {
+		{
+			size, err := m.Data.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTx(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Creator) > 0 {
+		i -= len(m.Creator)
+		copy(dAtA[i:], m.Creator)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgSaveEthaddressStoragePositionResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgSaveEthaddressStoragePositionResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgSaveEthaddressStoragePositionResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.EthAddress) > 0 {
+		i -= len(m.EthAddress)
+		copy(dAtA[i:], m.EthAddress)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.EthAddress)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintTx(dAtA []byte, offset int, v uint64) int {
 	offset -= sovTx(v)
 	base := offset
@@ -325,6 +539,36 @@ func (m *MsgAddAddress) Size() (n int) {
 }
 
 func (m *MsgAddAddressResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.EthAddress)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	return n
+}
+
+func (m *MsgSaveEthaddressStoragePosition) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Creator)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	if m.Data != nil {
+		l = m.Data.Size()
+		n += 1 + l + sovTx(uint64(l))
+	}
+	return n
+}
+
+func (m *MsgSaveEthaddressStoragePositionResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -484,6 +728,206 @@ func (m *MsgAddAddressResponse) Unmarshal(dAtA []byte) error {
 		}
 		if fieldNum <= 0 {
 			return fmt.Errorf("proto: MsgAddAddressResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field EthAddress", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.EthAddress = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgSaveEthaddressStoragePosition) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgSaveEthaddressStoragePosition: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgSaveEthaddressStoragePosition: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Creator = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Data", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Data == nil {
+				m.Data = &EthaddressStoragePosition{}
+			}
+			if err := m.Data.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgSaveEthaddressStoragePositionResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgSaveEthaddressStoragePositionResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgSaveEthaddressStoragePositionResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:

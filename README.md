@@ -54,15 +54,15 @@ ignite scaffold type ethaddress-storage-position ethAddress block:uint nonce:uin
  
 
 # add address
-ignite scaffold message add-address creator ethAddress --response ethAddress\
+ignite scaffold message add-address creator ethAddress --response ethAddress \
     --module storepositionether
-ignite scaffold message remove-address creator ethAddress --response ethAddress\
+ignite scaffold message remove-address creator ethAddress --response ethAddress \
     --module storepositionether
-ignite scaffold message disable-address creator ethAddress --response ethAddress\
+ignite scaffold message disable-address creator ethAddress --response ethAddress \
     --module storepositionether
 
 # save the storage-position for an address
-ignite scaffold message save-ethaddress-storage-position ethAddress data:EthaddressStoragePosition --response ethAddress\
+ignite scaffold message save-ethaddress-storage-position data:EthaddressStoragePosition --response ethAddress \
     --module storepositionether
 
 #get the storage-position for an address

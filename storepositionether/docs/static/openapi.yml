@@ -75411,7 +75411,28 @@ definitions:
         format: uint64
       active:
         type: boolean
+  storepositionether.storepositionether.EthaddressStoragePosition:
+    type: object
+    properties:
+      ethAddress:
+        type: string
+      block:
+        type: string
+        format: uint64
+      nonce:
+        type: string
+        format: uint64
+      storagePosition:
+        type: string
+        format: uint64
+      active:
+        type: boolean
   storepositionether.storepositionether.MsgAddAddressResponse:
+    type: object
+    properties:
+      ethAddress:
+        type: string
+  storepositionether.storepositionether.MsgSaveEthaddressStoragePositionResponse:
     type: object
     properties:
       ethAddress:
