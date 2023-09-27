@@ -46437,6 +46437,55 @@ paths:
                         }
       tags:
         - Query
+  /statether/statether/get_ethaddress_storage_position/{address}:
+    get:
+      summary: Queries a list of GetEthaddressStoragePosition items.
+      operationId: StatetherStatetherGetEthaddressStoragePosition
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  address:
+                    type: string
+                  block:
+                    type: string
+                    format: uint64
+                  nonce:
+                    type: string
+                    format: uint64
+                  storagePosition:
+                    type: string
+                    format: uint64
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: address
+          in: path
+          required: true
+          type: string
+      tags:
+        - Query
   /statether/statether/params:
     get:
       summary: Parameters queries the parameters of the module.
@@ -75212,6 +75261,20 @@ definitions:
     description: |-
       Version defines the versioning scheme used to negotiate the IBC verison in
       the connection handshake.
+  statether.statether.EthaddressStoragePosition:
+    type: object
+    properties:
+      address:
+        type: string
+      block:
+        type: string
+        format: uint64
+      nonce:
+        type: string
+        format: uint64
+      storagePosition:
+        type: string
+        format: uint64
   statether.statether.MsgAddAddressResponse:
     type: object
     properties:
@@ -75220,6 +75283,23 @@ definitions:
   statether.statether.Params:
     type: object
     description: Params defines the parameters for the module.
+  statether.statether.QueryGetEthaddressStoragePositionResponse:
+    type: object
+    properties:
+      data:
+        type: object
+        properties:
+          address:
+            type: string
+          block:
+            type: string
+            format: uint64
+          nonce:
+            type: string
+            format: uint64
+          storagePosition:
+            type: string
+            format: uint64
   statether.statether.QueryParamsResponse:
     type: object
     properties:
