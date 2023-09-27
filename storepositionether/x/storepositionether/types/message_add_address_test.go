@@ -15,15 +15,29 @@ func TestMsgAddAddress_ValidateBasic(t *testing.T) {
 		err  error
 	}{
 		{
-			name: "invalid address",
+			name: "invalid creator address",
 			msg: MsgAddAddress{
 				Creator: "invalid_address",
 			},
 			err: sdkerrors.ErrInvalidAddress,
 		}, {
-			name: "valid address",
+			name: "valid creator address",
 			msg: MsgAddAddress{
-				Creator: sample.AccAddress(),
+				Creator:    sample.AccAddress(),
+				EthAddress: "0xe8aCaaB95d1102D099F82F03f6106289ee19abA8",
+			},
+		}, {
+			name: "invalid ether address",
+			msg: MsgAddAddress{
+				Creator:    sample.AccAddress(),
+				EthAddress: "e8aCaaB95d1102D099F82F03f6106289ee19abA8",
+			},
+			err: ErrInvalidEthAddress,
+		}, {
+			name: "valid ether address",
+			msg: MsgAddAddress{
+				Creator:    sample.AccAddress(),
+				EthAddress: "0xe8aCaaB95d1102D099F82F03f6106289ee19abA8",
 			},
 		},
 	}

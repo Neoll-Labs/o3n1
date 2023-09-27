@@ -47,26 +47,39 @@ ignite scaffold map ethAddress block:uint nonce:uint storage-position:uint activ
     --no-message    
 
 
-#ignite scaffold module statether
+ignite scaffold module statether
  
-ignite scaffold type ethaddress-storage-position-stored address block:uint nonce:uint storage-position:uint active:bool
-ignite scaffold type ethaddress-storage-position block:uint nonce:uint storage-position:uint active:bool
+ignite scaffold type ethaddress-storage-position ethAddress block:uint nonce:uint storage-position:uint active:bool \
+    --module storepositionether
+ 
 
 # add address
-ignite scaffold message add-address ethAddress --response id
-ignite scaffold message remove-address ethAddress --response id
-ignite scaffold message disable-address ethAddress --response id
+ignite scaffold message add-address creator ethAddress --response ethAddress\
+    --module storepositionether
+ignite scaffold message remove-address creator ethAddress --response ethAddress\
+    --module storepositionether
+ignite scaffold message disable-address creator ethAddress --response ethAddress\
+    --module storepositionether
 
 # save the storage-position for an address
-ignite scaffold message save-ethaddress-storage-position ethAddress data:EthaddressStoragePosition --response id
+ignite scaffold message save-ethaddress-storage-position ethAddress data:EthaddressStoragePosition --response ethAddress\
+    --module storepositionether
 
 #get the storage-position for an address
-ignite scaffold query get-ethaddress-storage-position ethAddress --response data:EthaddressStoragePosition
+ignite scaffold query get-ethaddress-storage-position ethAddress --response data:EthaddressStoragePosition\
+    --module storepositionether
 
 # display addresses information
-ignite scaffold query get-all-ethaddresses-storage-positiona  --response data:EthaddressStoragePosition --paginated
+ignite scaffold query get-all-ethaddresses-storage-positiona  --response data:EthaddressStoragePosition --paginated\
+    --module storepositionether
 ```
 
+
+```shell
+ ./main tx  storepositionether add-address 0xe8aCaaB95d1102D099F82F03f6106289ee19abA8 --from cosmos1kcr3cx8lxc0w6uxdh93c3mef5v0wkgfcs6vvzq --gas auto
+
+
+```
 
 ```go
 package types

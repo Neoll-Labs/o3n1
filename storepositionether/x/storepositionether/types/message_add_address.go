@@ -1,8 +1,10 @@
 package types
 
 import (
+	errors "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	"regexp"
 )
 
 const TypeMsgAddAddress = "add_address"
@@ -40,7 +42,19 @@ func (msg *MsgAddAddress) GetSignBytes() []byte {
 func (msg *MsgAddAddress) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
-		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
+		return errors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
+
+	if !isValidEthAddress(msg.EthAddress) {
+		return errors.Wrapf(ErrInvalidEthAddress, "invalid eth address (%s)", msg.EthAddress)
+	}
+
 	return nil
+}
+
+func isValidEthAddress(address string) bool {
+	// Define a regular expression pattern for a valid Ethereum address
+	ethAddressPattern := regexp.MustCompile("^0x[0-9a-fA-F]{40}$")
+
+	return ethAddressPattern.MatchString(address)
 }
