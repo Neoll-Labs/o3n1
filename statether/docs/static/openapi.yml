@@ -75280,6 +75280,11 @@ definitions:
     properties:
       id:
         type: string
+  statether.statether.MsgSaveEthaddressStoragePositionResponse:
+    type: object
+    properties:
+      id:
+        type: string
   statether.statether.Params:
     type: object
     description: Params defines the parameters for the module.

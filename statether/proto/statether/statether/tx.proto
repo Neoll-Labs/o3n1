@@ -2,11 +2,14 @@ syntax = "proto3";
 
 package statether.statether;
 
+import "statether/statether/ethaddress_storage_position.proto";
+
 option go_package = "statether/x/statether/types";
 
 // Msg defines the Msg service.
 service Msg {
-  rpc AddAddress (MsgAddAddress) returns (MsgAddAddressResponse);
+  rpc AddAddress                    (MsgAddAddress                   ) returns (MsgAddAddressResponse                   );
+  rpc SaveEthaddressStoragePosition (MsgSaveEthaddressStoragePosition) returns (MsgSaveEthaddressStoragePositionResponse);
 }
 message MsgAddAddress {
   string creator = 1;
@@ -14,6 +17,15 @@ message MsgAddAddress {
 }
 
 message MsgAddAddressResponse {
+  string id = 1;
+}
+
+message MsgSaveEthaddressStoragePosition {
+  string                    creator = 1;
+  EthaddressStoragePosition data    = 2;
+}
+
+message MsgSaveEthaddressStoragePositionResponse {
   string id = 1;
 }
 

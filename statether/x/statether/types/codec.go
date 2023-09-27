@@ -9,12 +9,16 @@ import (
 
 func RegisterCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterConcrete(&MsgAddAddress{}, "statether/AddAddress", nil)
+	cdc.RegisterConcrete(&MsgSaveEthaddressStoragePosition{}, "statether/SaveEthaddressStoragePosition", nil)
 	// this line is used by starport scaffolding # 2
 }
 
 func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgAddAddress{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgSaveEthaddressStoragePosition{},
 	)
 	// this line is used by starport scaffolding # 3
 
