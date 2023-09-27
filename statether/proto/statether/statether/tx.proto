@@ -10,6 +10,7 @@ option go_package = "statether/x/statether/types";
 service Msg {
   rpc AddAddress                    (MsgAddAddress                   ) returns (MsgAddAddressResponse                   );
   rpc SaveEthaddressStoragePosition (MsgSaveEthaddressStoragePosition) returns (MsgSaveEthaddressStoragePositionResponse);
+  rpc RemoveAddress                 (MsgRemoveAddress                ) returns (MsgRemoveAddressResponse                );
 }
 message MsgAddAddress {
   string creator = 1;
@@ -26,6 +27,15 @@ message MsgSaveEthaddressStoragePosition {
 }
 
 message MsgSaveEthaddressStoragePositionResponse {
+  string id = 1;
+}
+
+message MsgRemoveAddress {
+  string creator = 1;
+  string address = 2;
+}
+
+message MsgRemoveAddressResponse {
   string id = 1;
 }
 

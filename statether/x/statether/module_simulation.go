@@ -31,6 +31,10 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgSaveEthaddressStoragePosition int = 100
 
+	opWeightMsgRemoveAddress = "op_weight_msg_remove_address"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgRemoveAddress int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -81,6 +85,17 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		statethersimulation.SimulateMsgSaveEthaddressStoragePosition(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
+	var weightMsgRemoveAddress int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgRemoveAddress, &weightMsgRemoveAddress, nil,
+		func(_ *rand.Rand) {
+			weightMsgRemoveAddress = defaultWeightMsgRemoveAddress
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgRemoveAddress,
+		statethersimulation.SimulateMsgRemoveAddress(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
 	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
@@ -102,6 +117,14 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			defaultWeightMsgSaveEthaddressStoragePosition,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
 				statethersimulation.SimulateMsgSaveEthaddressStoragePosition(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgRemoveAddress,
+			defaultWeightMsgRemoveAddress,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				statethersimulation.SimulateMsgRemoveAddress(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),

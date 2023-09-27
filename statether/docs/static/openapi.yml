@@ -75409,6 +75409,11 @@ definitions:
     properties:
       id:
         type: string
+  statether.statether.MsgRemoveAddressResponse:
+    type: object
+    properties:
+      id:
+        type: string
   statether.statether.MsgSaveEthaddressStoragePositionResponse:
     type: object
     properties:
