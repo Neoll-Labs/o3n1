@@ -1,7 +1,23 @@
 syntax = "proto3";
+
 package statether.statether;
 
 option go_package = "github.com/nelsonstr/o3n1/statether/x/statether/types";
 
 // Msg defines the Msg service.
-service Msg {}
+service Msg {
+  rpc SaveEthaddressState (MsgSaveEthaddressState) returns (MsgSaveEthaddressStateResponse);
+}
+message MsgSaveEthaddressState {
+  string creator         = 1;
+  string ethAddress      = 2;
+  uint64 block           = 3;
+  uint64 nonce           = 4;
+  uint64 storagePosition = 5;
+  bool   active          = 6;
+}
+
+message MsgSaveEthaddressStateResponse {
+  string ethAddress = 1;
+}
+

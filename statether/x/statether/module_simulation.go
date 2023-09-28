@@ -23,7 +23,11 @@ var (
 )
 
 const (
-// this line is used by starport scaffolding # simapp/module/const
+	opWeightMsgSaveEthaddressState = "op_weight_msg_save_ethaddress_state"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgSaveEthaddressState int = 100
+
+	// this line is used by starport scaffolding # simapp/module/const
 )
 
 // GenerateGenesisState creates a randomized GenState of the module.
@@ -51,6 +55,17 @@ func (AppModule) ProposalContents(_ module.SimulationState) []simtypes.WeightedP
 func (am AppModule) WeightedOperations(simState module.SimulationState) []simtypes.WeightedOperation {
 	operations := make([]simtypes.WeightedOperation, 0)
 
+	var weightMsgSaveEthaddressState int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgSaveEthaddressState, &weightMsgSaveEthaddressState, nil,
+		func(_ *rand.Rand) {
+			weightMsgSaveEthaddressState = defaultWeightMsgSaveEthaddressState
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgSaveEthaddressState,
+		statethersimulation.SimulateMsgSaveEthaddressState(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
 	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
@@ -59,6 +74,14 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 // ProposalMsgs returns msgs used for governance proposals for simulations.
 func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.WeightedProposalMsg {
 	return []simtypes.WeightedProposalMsg{
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgSaveEthaddressState,
+			defaultWeightMsgSaveEthaddressState,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				statethersimulation.SimulateMsgSaveEthaddressState(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
 		// this line is used by starport scaffolding # simapp/module/OpMsg
 	}
 }

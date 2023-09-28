@@ -75399,6 +75399,11 @@ definitions:
     description: |-
       Version defines the versioning scheme used to negotiate the IBC verison in
       the connection handshake.
+  statether.statether.MsgSaveEthaddressStateResponse:
+    type: object
+    properties:
+      ethAddress:
+        type: string
   statether.statether.Params:
     type: object
     description: Params defines the parameters for the module.
