@@ -1,0 +1,7 @@
+syntax = "proto3";
+package statether.statether;
+
+option go_package = "github.com/nelsonstr/o3n1/statether/x/statether/types";
+
+// Msg defines the Msg service.
+service Msg {}

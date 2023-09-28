@@ -2,18 +2,20 @@
 * Your goal is to utilize the Cosmos SDK to build a prototype blockchain that can read state from Ethereum, 
 verify its validity, and store it on your chain.
 
-
 * Your chain should be able to agree upon some Ethereum state.
 
 * The mechanism that facilitates this agreement is up to you.
 
 * Your chain should be able to store the state value for an Ethereum address  + storage slot.
 
-* The address/storage slot pair should be parameterized such that any address/slot combination can be stored on your chain.
+* The address/storage slot pair should be parameterized such that any address/slot 
+combination can be stored on your chain.
 
-Once some storage value is agreed upon, it should be stored on your blockchain along with any necessary metadata that can be used to identify it. Users should be able to read data this from your blockchain.
+* Once some storage value is agreed upon,
+it should be stored on your blockchain along with any necessary metadata that can be used to identify it.
 
-To read state from Ethereum, you’ll need to interact with an [Ethereum RPC endpoint](https://ethereum.org/en/developers/docs/apis/json-rpc/) to read Ethereum state. Specifically, you’ll need to utilize the [eth_getStorageAt](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getstorageat) call.
+* Users should be able to read data this from your blockchain.
+
 
 
 
@@ -70,10 +72,9 @@ expected output
 
 ```shell
 
-ignite scaffold chain storepositionether 
+ignite scaffold chain github.com/nelsonstr/o3n1/statether 
 
 cd storepositionether
-
 
 ignite scaffold map ethAddress block:uint nonce:uint storage-position:uint active:bool \
     --index index \
