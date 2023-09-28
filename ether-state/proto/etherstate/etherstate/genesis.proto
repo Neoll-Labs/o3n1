@@ -1,0 +1,12 @@
+syntax = "proto3";
+package etherstate.etherstate;
+
+import "gogoproto/gogo.proto";
+import "etherstate/etherstate/params.proto";
+
+option go_package = "ether-state/x/etherstate/types";
+
+// GenesisState defines the etherstate module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+}

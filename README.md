@@ -21,13 +21,12 @@ it should be stored on your blockchain along with any necessary metadata that ca
 
 ## features
 
-
 * Save Ethereum *address storage position* (state) with the block number and nonce
 
 * Get Ethereum state from blockchain
 
 * register Ethereum addresses for monitoring
-* 
+
 * suspend the Ethereum address monitoring
 
 * remove the Ethereum address monitoring
@@ -43,20 +42,20 @@ golang
 
 # init demo chain
 
-init `demoChain`
+init `statether`
 ```shell
-ignite scaffold chain statether 
+ignite scaffold chain ether-state
 ```
 expect output
 ```shell
-⭐️ Successfully created a new blockchain 'statether'.
+⭐️ Successfully created a new blockchain 'ether-state'.
 👉 Get started with the following commands:
 
 ```
 
 start the blockchain with
 ```shell
-cd statether
+cd ether-state
 ignite chain serve
 ```
 
@@ -74,6 +73,8 @@ expected output
 
 ignite scaffold chain github.com/nelsonstr/o3n1/statether 
 
+ignite generate ts-client
+
 cd statether
 
 ignite chain serve 
@@ -85,8 +86,8 @@ http://localhost:1317/
 
 ```shell
 
-
-ignite scaffold map statether ethAddress block:uint nonce:uint storage-position:uint active:bool \
+# eth address is the index
+ignite scaffold map statether block:uint nonce:uint storage-position:uint active:bool \
     --index index \
     --module statether \
     --no-message    
@@ -96,7 +97,7 @@ ignite scaffold message save-ethaddress-state ethAddress block:uint nonce:uint s
     --module statether
 
 
-ignite scaffold message get-ethaddress-state1 ethAddress \
+ignite scaffold message get-ethaddress-state ethAddress \
     --response data:Statether \
     --module statether
 
@@ -107,7 +108,12 @@ ignite scaffold type ethaddress-storage-position ethAddress block:uint nonce:uin
  
  # save the storage-position for an address
 ignite scaffold message save-ethaddress-state ethAddress block:uint nonce:uint storage-position:uint --response ethAddress \
-    --module storepositionether
+    --module statether
+
+#get the state for an address
+ignite scaffold query get-ethaddress-state ethAddress --response data:EthaddressStoragePosition\
+    --module statether
+
 
 # add address
 ignite scaffold message add-address creator ethAddress --response ethAddress \
@@ -121,9 +127,7 @@ ignite scaffold message disable-address creator ethAddress --response ethAddress
 ignite scaffold message save-ethaddress-state ethAddress block:uint nonce:uint storage-position:uint --response ethAddress \
     --module storepositionether
 
-#get the storage-position for an address
-ignite scaffold query get-ethaddress-state ethAddress --response data:EthaddressStoragePosition\
-    --module storepositionether
+
 
 # display addresses information
 ignite scaffold query get-all-ethaddresses-storage-positiona  --response data:EthaddressStoragePosition --paginated\
@@ -139,6 +143,11 @@ ignite scaffold query get-all-ethaddresses-storage-positiona  --response data:Et
 ```shell
 
 ./main tx  statether save-ethaddress-state 0xe8aCaaB95d1102D099F82F03f6106289ee19abA8 0 0 0 --from cosmos17tzhfv8zpjx2weplrgzwetsg5ah53xu9hza0sr --gas auto
+
+
+./main query  statether show-statether 0xe8aCaaB95d1102D099F82F03f6106289ee19abA8
+
+
 
 ```
 

@@ -1,0 +1,7 @@
+syntax = "proto3";
+package etherstate.etherstate;
+
+option go_package = "ether-state/x/etherstate/types";
+
+// Msg defines the Msg service.
+service Msg {}
