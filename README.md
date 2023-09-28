@@ -1,3 +1,21 @@
+# GOALS
+* Your goal is to utilize the Cosmos SDK to build a prototype blockchain that can read state from Ethereum, 
+verify its validity, and store it on your chain.
+
+
+## features
+
+* register Ethereum addresses for monitoring
+
+* Save Ethereum *address storage position* (state) with the block number and nonce
+
+* suspend the Ethereum address monitoring
+
+* remove the Ethereum address monitoring
+
+
+* List all Ethereum addresses enabled
+
 
 
 # required tools
@@ -75,11 +93,19 @@ ignite scaffold query get-all-ethaddresses-storage-positiona  --response data:Et
 ```
 
 
+# command line
+
+## add ethereum address
 ```shell
  ./main tx  storepositionether add-address 0xe8aCaaB95d1102D099F82F03f6106289ee19abA8 --from cosmos1kcr3cx8lxc0w6uxdh93c3mef5v0wkgfcs6vvzq --gas auto
-
-
 ```
+
+## save storage position for ethereum address(also store the nonce and block number)
+
+```shell
+./main tx  storepositionether save-ethaddress-storage-position 0xe8aCaaB95d1102D099F82F03f6106289ee19abA8 0 0 0 --from cosmos1kcr3cx8lxc0w6uxdh93c3mef5v0wkgfcs6vvzq --gas auto
+```
+
 
 ```go
 package types
