@@ -19,6 +19,7 @@ it should be stored on your blockchain along with any necessary metadata that ca
 
 
 
+
 ## features
 
 * register Ethereum addresses for monitoring
@@ -32,9 +33,14 @@ it should be stored on your blockchain along with any necessary metadata that ca
 * Get Ethereum state from blockchain
   * query 
 
-
 * List all Ethereum addresses enabled
 
+  * relayer
+    * listening the changes on the ethereum address 
+      * on change subscrive event on ethereum 
+        ```shell
+          wscat -c wss://mainnet.infura.io/ws/v3/YOUR-API-KEY > {"jsonrpc":  "2.0",  "id":  1,  "method":  "eth_subscribe",  "params":  ["newHeads"]}
+        ```
 
 
 # required tools
