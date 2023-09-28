@@ -75399,6 +75399,11 @@ definitions:
     description: |-
       Version defines the versioning scheme used to negotiate the IBC verison in
       the connection handshake.
+  statether.statether.MsgGetEthaddressStateResponse:
+    type: object
+    properties:
+      exists:
+        type: boolean
   statether.statether.MsgSaveEthaddressStateResponse:
     type: object
     properties:
