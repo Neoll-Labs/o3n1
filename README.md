@@ -3,16 +3,32 @@
 verify its validity, and store it on your chain.
 
 
+* Your chain should be able to agree upon some Ethereum state.
+
+* The mechanism that facilitates this agreement is up to you.
+
+* Your chain should be able to store the state value for an Ethereum address  + storage slot.
+
+* The address/storage slot pair should be parameterized such that any address/slot combination can be stored on your chain.
+
+Once some storage value is agreed upon, it should be stored on your blockchain along with any necessary metadata that can be used to identify it. Users should be able to read data this from your blockchain.
+
+To read state from Ethereum, you’ll need to interact with an [Ethereum RPC endpoint](https://ethereum.org/en/developers/docs/apis/json-rpc/) to read Ethereum state. Specifically, you’ll need to utilize the [eth_getStorageAt](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getstorageat) call.
+
+
+
 ## features
 
-* register Ethereum addresses for monitoring
 
 * Save Ethereum *address storage position* (state) with the block number and nonce
 
+* Get Ethereum state from blockchain
+
+* register Ethereum addresses for monitoring
+* 
 * suspend the Ethereum address monitoring
 
 * remove the Ethereum address monitoring
-
 
 * List all Ethereum addresses enabled
 
@@ -65,11 +81,14 @@ ignite scaffold map ethAddress block:uint nonce:uint storage-position:uint activ
     --no-message    
 
 
-ignite scaffold module statether
+ignite scaffold module storepositionether
  
 ignite scaffold type ethaddress-storage-position ethAddress block:uint nonce:uint storage-position:uint active:bool \
     --module storepositionether
  
+ # save the storage-position for an address
+ignite scaffold message save-ethaddress-state ethAddress block:uint nonce:uint storage-position:uint --response ethAddress \
+    --module storepositionether
 
 # add address
 ignite scaffold message add-address creator ethAddress --response ethAddress \
@@ -80,11 +99,11 @@ ignite scaffold message disable-address creator ethAddress --response ethAddress
     --module storepositionether
 
 # save the storage-position for an address
-ignite scaffold message save-ethaddress-storage-position ethAddress block:uint nonce:uint storage-position:uint --response ethAddress \
+ignite scaffold message save-ethaddress-state ethAddress block:uint nonce:uint storage-position:uint --response ethAddress \
     --module storepositionether
 
 #get the storage-position for an address
-ignite scaffold query get-ethaddress-storage-position ethAddress --response data:EthaddressStoragePosition\
+ignite scaffold query get-ethaddress-state ethAddress --response data:EthaddressStoragePosition\
     --module storepositionether
 
 # display addresses information
