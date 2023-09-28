@@ -9,7 +9,6 @@ message Statether {
   uint64 block = 3; 
   uint64 nonce = 4; 
   uint64 storagePosition = 5; 
-  bool active = 6; 
   
 }
 

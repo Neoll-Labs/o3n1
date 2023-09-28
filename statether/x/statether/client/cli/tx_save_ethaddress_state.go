@@ -15,9 +15,9 @@ var _ = strconv.Itoa(0)
 
 func CmdSaveEthaddressState() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "save-ethaddress-state [eth-address] [block] [nonce] [storage-position] [active]",
+		Use:   "save-ethaddress-state [eth-address] [block] [nonce] [storage-position]",
 		Short: "Broadcast message save-ethaddress-state",
-		Args:  cobra.ExactArgs(5),
+		Args:  cobra.ExactArgs(4),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			argEthAddress := args[0]
 			argBlock, err := cast.ToUint64E(args[1])
@@ -29,10 +29,6 @@ func CmdSaveEthaddressState() *cobra.Command {
 				return err
 			}
 			argStoragePosition, err := cast.ToUint64E(args[3])
-			if err != nil {
-				return err
-			}
-			argActive, err := cast.ToBoolE(args[4])
 			if err != nil {
 				return err
 			}
@@ -48,7 +44,6 @@ func CmdSaveEthaddressState() *cobra.Command {
 				argBlock,
 				argNonce,
 				argStoragePosition,
-				argActive,
 			)
 			if err := msg.ValidateBasic(); err != nil {
 				return err

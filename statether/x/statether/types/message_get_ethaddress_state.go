@@ -1,8 +1,10 @@
 package types
 
 import (
+	"cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	"github.com/nelsonstr/o3n1/statether/helpers"
 )
 
 const TypeMsgGetEthaddressState = "get_ethaddress_state"
@@ -16,7 +18,6 @@ func NewMsgGetEthaddressState(creator string, ethAddress string, block uint64, n
 		Block:           block,
 		Nonce:           nonce,
 		StoragePosition: storagePosition,
-		Active:          active,
 	}
 }
 
@@ -44,7 +45,13 @@ func (msg *MsgGetEthaddressState) GetSignBytes() []byte {
 func (msg *MsgGetEthaddressState) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
-		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
+		return errors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
+
+	if helpers.IsValidEthAddress(msg.EthAddress) {
+
+		return errors.Wrapf(ErrInvalidEthereumAddress, "invalid ethereum address (%s)", msg.EthAddress)
+	}
+
 	return nil
 }

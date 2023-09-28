@@ -3,10 +3,13 @@ package types
 // DONTCOVER
 
 import (
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	"cosmossdk.io/errors"
 )
 
 // x/statether module sentinel errors
 var (
-	ErrSample = sdkerrors.Register(ModuleName, 1100, "sample error")
+	ErrInvalidEthereumAddress = errors.Register(ModuleName, 1101, "invalid ethereum address")
+	ErrInvalidNonce           = errors.Register(ModuleName, 1102, "invalid nonce")
+	ErrInvalidBlockNumber     = errors.Register(ModuleName, 1103, "invalid block number")
+	ErrInvalidStoragePosition = errors.Register(ModuleName, 1104, "invalid storage position")
 )

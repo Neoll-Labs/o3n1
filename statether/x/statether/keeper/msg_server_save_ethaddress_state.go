@@ -13,5 +13,13 @@ func (k msgServer) SaveEthaddressState(goCtx context.Context, msg *types.MsgSave
 	// TODO: Handling the message
 	_ = ctx
 
+	k.Keeper.SetStatether(ctx, types.Statether{
+		Index:           msg.EthAddress,
+		EthAddress:      msg.EthAddress,
+		Block:           msg.Block,
+		Nonce:           msg.Nonce,
+		StoragePosition: msg.StoragePosition,
+	})
+
 	return &types.MsgSaveEthaddressStateResponse{}, nil
 }

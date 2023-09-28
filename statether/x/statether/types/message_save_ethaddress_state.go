@@ -9,14 +9,13 @@ const TypeMsgSaveEthaddressState = "save_ethaddress_state"
 
 var _ sdk.Msg = &MsgSaveEthaddressState{}
 
-func NewMsgSaveEthaddressState(creator string, ethAddress string, block uint64, nonce uint64, storagePosition uint64, active bool) *MsgSaveEthaddressState {
+func NewMsgSaveEthaddressState(creator string, ethAddress string, block uint64, nonce uint64, storagePosition uint64) *MsgSaveEthaddressState {
 	return &MsgSaveEthaddressState{
 		Creator:         creator,
 		EthAddress:      ethAddress,
 		Block:           block,
 		Nonce:           nonce,
 		StoragePosition: storagePosition,
-		Active:          active,
 	}
 }
 

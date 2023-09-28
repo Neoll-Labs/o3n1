@@ -46500,8 +46500,6 @@ paths:
                     storagePosition:
                       type: string
                       format: uint64
-                    active:
-                      type: boolean
               pagination:
                 type: object
                 properties:
@@ -46633,8 +46631,6 @@ paths:
                   storagePosition:
                     type: string
                     format: uint64
-                  active:
-                    type: boolean
         default:
           description: An unexpected error response.
           schema:
@@ -75433,8 +75429,6 @@ definitions:
             storagePosition:
               type: string
               format: uint64
-            active:
-              type: boolean
       pagination:
         type: object
         properties:
@@ -75480,8 +75474,6 @@ definitions:
           storagePosition:
             type: string
             format: uint64
-          active:
-            type: boolean
   statether.statether.QueryParamsResponse:
     type: object
     properties:
@@ -75505,5 +75497,3 @@ definitions:
       storagePosition:
         type: string
         format: uint64
-      active:
-        type: boolean
