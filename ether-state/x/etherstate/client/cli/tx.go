@@ -8,7 +8,7 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/client"
 	// "github.com/cosmos/cosmos-sdk/client/flags"
-	"ether-state/x/etherstate/types"
+	"github.com/nelsonstr/o3n1/ether-state/x/etherstate/types"
 )
 
 var (
@@ -30,6 +30,8 @@ func GetTxCmd() *cobra.Command {
 		RunE:                       client.ValidateCmd,
 	}
 
+	cmd.AddCommand(CmdEnableEthAddress())
+	cmd.AddCommand(CmdDisableEthAddress())
 	// this line is used by starport scaffolding # 1
 
 	return cmd

@@ -3,10 +3,10 @@ package etherstate_test
 import (
 	"testing"
 
-	keepertest "ether-state/testutil/keeper"
-	"ether-state/testutil/nullify"
-	"ether-state/x/etherstate"
-	"ether-state/x/etherstate/types"
+	keepertest "github.com/nelsonstr/o3n1/ether-state/testutil/keeper"
+	"github.com/nelsonstr/o3n1/ether-state/testutil/nullify"
+	"github.com/nelsonstr/o3n1/ether-state/x/etherstate"
+	"github.com/nelsonstr/o3n1/ether-state/x/etherstate/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -14,6 +14,14 @@ func TestGenesis(t *testing.T) {
 	genesisState := types.GenesisState{
 		Params: types.DefaultParams(),
 
+		EthereumAddressList: []types.EthereumAddress{
+			{
+				Index: "0",
+			},
+			{
+				Index: "1",
+			},
+		},
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -25,5 +33,6 @@ func TestGenesis(t *testing.T) {
 	nullify.Fill(&genesisState)
 	nullify.Fill(got)
 
+	require.ElementsMatch(t, genesisState.EthereumAddressList, got.EthereumAddressList)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

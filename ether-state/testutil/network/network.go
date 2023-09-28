@@ -18,7 +18,7 @@ import (
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	"github.com/stretchr/testify/require"
 
-	"ether-state/app"
+	"github.com/nelsonstr/o3n1/ether-state/app"
 )
 
 type (

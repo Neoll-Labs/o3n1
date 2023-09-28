@@ -11,9 +11,9 @@ import (
 
 	abci "github.com/cometbft/cometbft/abci/types"
 
-	"ether-state/x/etherstate/client/cli"
-	"ether-state/x/etherstate/keeper"
-	"ether-state/x/etherstate/types"
+	"github.com/nelsonstr/o3n1/ether-state/x/etherstate/client/cli"
+	"github.com/nelsonstr/o3n1/ether-state/x/etherstate/keeper"
+	"github.com/nelsonstr/o3n1/ether-state/x/etherstate/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
 	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"

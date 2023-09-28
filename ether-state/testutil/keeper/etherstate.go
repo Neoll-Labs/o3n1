@@ -3,8 +3,6 @@ package keeper
 import (
 	"testing"
 
-	"ether-state/x/etherstate/keeper"
-	"ether-state/x/etherstate/types"
 	tmdb "github.com/cometbft/cometbft-db"
 	"github.com/cometbft/cometbft/libs/log"
 	tmproto "github.com/cometbft/cometbft/proto/tendermint/types"
@@ -14,6 +12,8 @@ import (
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	typesparams "github.com/cosmos/cosmos-sdk/x/params/types"
+	"github.com/nelsonstr/o3n1/ether-state/x/etherstate/keeper"
+	"github.com/nelsonstr/o3n1/ether-state/x/etherstate/types"
 	"github.com/stretchr/testify/require"
 )
 

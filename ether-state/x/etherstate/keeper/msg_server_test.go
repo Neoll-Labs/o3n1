@@ -4,9 +4,9 @@ import (
 	"context"
 	"testing"
 
-	keepertest "ether-state/testutil/keeper"
-	"ether-state/x/etherstate/keeper"
-	"ether-state/x/etherstate/types"
+	keepertest "github.com/nelsonstr/o3n1/ether-state/testutil/keeper"
+	"github.com/nelsonstr/o3n1/ether-state/x/etherstate/keeper"
+	"github.com/nelsonstr/o3n1/ether-state/x/etherstate/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 )

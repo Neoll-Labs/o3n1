@@ -3,7 +3,7 @@ package types_test
 import (
 	"testing"
 
-	"ether-state/x/etherstate/types"
+	"github.com/nelsonstr/o3n1/ether-state/x/etherstate/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -19,12 +19,34 @@ func TestGenesisState_Validate(t *testing.T) {
 			valid:    true,
 		},
 		{
-			desc:     "valid genesis state",
+			desc: "valid genesis state",
 			genState: &types.GenesisState{
 
+				EthereumAddressList: []types.EthereumAddress{
+					{
+						Index: "0",
+					},
+					{
+						Index: "1",
+					},
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
+		},
+		{
+			desc: "duplicated ethereumAddress",
+			genState: &types.GenesisState{
+				EthereumAddressList: []types.EthereumAddress{
+					{
+						Index: "0",
+					},
+					{
+						Index: "0",
+					},
+				},
+			},
+			valid: false,
 		},
 		// this line is used by starport scaffolding # types/genesis/testcase
 	}

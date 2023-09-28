@@ -3,7 +3,7 @@ package etherstate.etherstate;
 
 import "gogoproto/gogo.proto";
 
-option go_package = "ether-state/x/etherstate/types";
+option go_package = "github.com/nelsonstr/o3n1/ether-state/x/etherstate/types";
 
 // Params defines the parameters for the module.
 message Params {

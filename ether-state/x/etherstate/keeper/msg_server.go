@@ -1,7 +1,7 @@
 package keeper
 
 import (
-	"ether-state/x/etherstate/types"
+	"github.com/nelsonstr/o3n1/ether-state/x/etherstate/types"
 )
 
 type msgServer struct {

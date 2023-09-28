@@ -10,7 +10,7 @@ import (
 	// "github.com/cosmos/cosmos-sdk/client/flags"
 	// sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"ether-state/x/etherstate/types"
+	"github.com/nelsonstr/o3n1/ether-state/x/etherstate/types"
 )
 
 // GetQueryCmd returns the cli query commands for this module
@@ -25,6 +25,8 @@ func GetQueryCmd(queryRoute string) *cobra.Command {
 	}
 
 	cmd.AddCommand(CmdQueryParams())
+	cmd.AddCommand(CmdListEthereumAddress())
+	cmd.AddCommand(CmdShowEthereumAddress())
 	// this line is used by starport scaffolding # 1
 
 	return cmd

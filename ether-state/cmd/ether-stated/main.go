@@ -6,8 +6,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/server"
 	svrcmd "github.com/cosmos/cosmos-sdk/server/cmd"
 
-	"ether-state/app"
-	"ether-state/cmd/ether-stated/cmd"
+	"github.com/nelsonstr/o3n1/ether-state/app"
+	"github.com/nelsonstr/o3n1/ether-state/cmd/ether-stated/cmd"
 )
 
 func main() {

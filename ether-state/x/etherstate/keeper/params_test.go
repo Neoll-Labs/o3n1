@@ -3,8 +3,8 @@ package keeper_test
 import (
 	"testing"
 
-	testkeeper "ether-state/testutil/keeper"
-	"ether-state/x/etherstate/types"
+	testkeeper "github.com/nelsonstr/o3n1/ether-state/testutil/keeper"
+	"github.com/nelsonstr/o3n1/ether-state/x/etherstate/types"
 	"github.com/stretchr/testify/require"
 )
 

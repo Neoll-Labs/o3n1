@@ -7,11 +7,34 @@ import { msgTypes } from './registry';
 import { IgniteClient } from "../client"
 import { MissingWalletError } from "../helpers"
 import { Api } from "./rest";
+import { MsgDisableEthAddress } from "./types/etherstate/etherstate/tx";
+import { MsgEnableEthAddress } from "./types/etherstate/etherstate/tx";
 
+import { EthereumAddress as typeEthereumAddress} from "./types"
 import { Params as typeParams} from "./types"
 
-export {  };
+export { MsgDisableEthAddress, MsgEnableEthAddress };
 
+type sendMsgDisableEthAddressParams = {
+  value: MsgDisableEthAddress,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgEnableEthAddressParams = {
+  value: MsgEnableEthAddress,
+  fee?: StdFee,
+  memo?: string
+};
+
+
+type msgDisableEthAddressParams = {
+  value: MsgDisableEthAddress,
+};
+
+type msgEnableEthAddressParams = {
+  value: MsgEnableEthAddress,
+};
 
 
 export const registry = new Registry(msgTypes);
@@ -43,6 +66,50 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 
   return {
 		
+		async sendMsgDisableEthAddress({ value, fee, memo }: sendMsgDisableEthAddressParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgDisableEthAddress: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry, prefix});
+				let msg = this.msgDisableEthAddress({ value: MsgDisableEthAddress.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgDisableEthAddress: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgEnableEthAddress({ value, fee, memo }: sendMsgEnableEthAddressParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgEnableEthAddress: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry, prefix});
+				let msg = this.msgEnableEthAddress({ value: MsgEnableEthAddress.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgEnableEthAddress: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		
+		msgDisableEthAddress({ value }: msgDisableEthAddressParams): EncodeObject {
+			try {
+				return { typeUrl: "/etherstate.etherstate.MsgDisableEthAddress", value: MsgDisableEthAddress.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgDisableEthAddress: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgEnableEthAddress({ value }: msgEnableEthAddressParams): EncodeObject {
+			try {
+				return { typeUrl: "/etherstate.etherstate.MsgEnableEthAddress", value: MsgEnableEthAddress.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgEnableEthAddress: Could not create message: ' + e.message)
+			}
+		},
 		
 	}
 };
@@ -66,6 +133,7 @@ class SDKModule {
 		this.query = queryClient({ addr: client.env.apiURL });		
 		this.updateTX(client);
 		this.structure =  {
+						EthereumAddress: getStructure(typeEthereumAddress.fromPartial({})),
 						Params: getStructure(typeParams.fromPartial({})),
 						
 		};

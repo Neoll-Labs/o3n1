@@ -1,12 +1,16 @@
 syntax = "proto3";
+
 package etherstate.etherstate;
 
 import "gogoproto/gogo.proto";
 import "etherstate/etherstate/params.proto";
+import "etherstate/etherstate/ethereum_address.proto";
 
-option go_package = "ether-state/x/etherstate/types";
+option go_package = "github.com/nelsonstr/o3n1/ether-state/x/etherstate/types";
 
 // GenesisState defines the etherstate module's genesis state.
 message GenesisState {
-  Params params = 1 [(gogoproto.nullable) = false];
+           Params          params              = 1 [(gogoproto.nullable) = false];
+  repeated EthereumAddress ethereumAddressList = 2 [(gogoproto.nullable) = false];
 }
+

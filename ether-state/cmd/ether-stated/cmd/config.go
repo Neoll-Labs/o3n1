@@ -3,7 +3,7 @@ package cmd
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"ether-state/app"
+	"github.com/nelsonstr/o3n1/ether-state/app"
 )
 
 func initSDKConfig() {

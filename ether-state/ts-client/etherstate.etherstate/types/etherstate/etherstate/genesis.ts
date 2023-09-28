@@ -1,5 +1,6 @@
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
+import { EthereumAddress } from "./ethereum_address";
 import { Params } from "./params";
 
 export const protobufPackage = "etherstate.etherstate";
@@ -7,16 +8,20 @@ export const protobufPackage = "etherstate.etherstate";
 /** GenesisState defines the etherstate module's genesis state. */
 export interface GenesisState {
   params: Params | undefined;
+  ethereumAddressList: EthereumAddress[];
 }
 
 function createBaseGenesisState(): GenesisState {
-  return { params: undefined };
+  return { params: undefined, ethereumAddressList: [] };
 }
 
 export const GenesisState = {
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
+    }
+    for (const v of message.ethereumAddressList) {
+      EthereumAddress.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -31,6 +36,9 @@ export const GenesisState = {
         case 1:
           message.params = Params.decode(reader, reader.uint32());
           break;
+        case 2:
+          message.ethereumAddressList.push(EthereumAddress.decode(reader, reader.uint32()));
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -40,12 +48,22 @@ export const GenesisState = {
   },
 
   fromJSON(object: any): GenesisState {
-    return { params: isSet(object.params) ? Params.fromJSON(object.params) : undefined };
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
+      ethereumAddressList: Array.isArray(object?.ethereumAddressList)
+        ? object.ethereumAddressList.map((e: any) => EthereumAddress.fromJSON(e))
+        : [],
+    };
   },
 
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
+    if (message.ethereumAddressList) {
+      obj.ethereumAddressList = message.ethereumAddressList.map((e) => e ? EthereumAddress.toJSON(e) : undefined);
+    } else {
+      obj.ethereumAddressList = [];
+    }
     return obj;
   },
 
@@ -54,6 +72,7 @@ export const GenesisState = {
     message.params = (object.params !== undefined && object.params !== null)
       ? Params.fromPartial(object.params)
       : undefined;
+    message.ethereumAddressList = object.ethereumAddressList?.map((e) => EthereumAddress.fromPartial(e)) || [];
     return message;
   },
 };

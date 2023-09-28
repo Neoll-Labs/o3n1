@@ -110,13 +110,13 @@ import (
 	ibctm "github.com/cosmos/ibc-go/v7/modules/light-clients/07-tendermint"
 	"github.com/spf13/cast"
 
-	etherstatemodule "ether-state/x/etherstate"
-	etherstatemodulekeeper "ether-state/x/etherstate/keeper"
-	etherstatemoduletypes "ether-state/x/etherstate/types"
+	etherstatemodule "github.com/nelsonstr/o3n1/ether-state/x/etherstate"
+	etherstatemodulekeeper "github.com/nelsonstr/o3n1/ether-state/x/etherstate/keeper"
+	etherstatemoduletypes "github.com/nelsonstr/o3n1/ether-state/x/etherstate/types"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 
-	appparams "ether-state/app/params"
-	"ether-state/docs"
+	appparams "github.com/nelsonstr/o3n1/ether-state/app/params"
+	"github.com/nelsonstr/o3n1/ether-state/docs"
 )
 
 const (

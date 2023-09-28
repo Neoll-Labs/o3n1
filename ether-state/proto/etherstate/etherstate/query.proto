@@ -1,26 +1,58 @@
 syntax = "proto3";
+
 package etherstate.etherstate;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "etherstate/etherstate/params.proto";
+import "etherstate/etherstate/ethereum_address.proto";
 
-option go_package = "ether-state/x/etherstate/types";
+option go_package = "github.com/nelsonstr/o3n1/ether-state/x/etherstate/types";
 
 // Query defines the gRPC querier service.
 service Query {
+  
   // Parameters queries the parameters of the module.
-  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/ether-state/etherstate/params";
+  
+  }
+  
+  // Queries a list of EthereumAddress items.
+  rpc EthereumAddress    (QueryGetEthereumAddressRequest) returns (QueryGetEthereumAddressResponse) {
+    option (google.api.http).get = "/ether-state/etherstate/ethereum_address/{index}";
+  
+  }
+  rpc EthereumAddressAll (QueryAllEthereumAddressRequest) returns (QueryAllEthereumAddressResponse) {
+    option (google.api.http).get = "/ether-state/etherstate/ethereum_address";
+  
   }
 }
-
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {
+  
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
 }
+
+message QueryGetEthereumAddressRequest {
+  string index = 1;
+}
+
+message QueryGetEthereumAddressResponse {
+  EthereumAddress ethereumAddress = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllEthereumAddressRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllEthereumAddressResponse {
+  repeated EthereumAddress                        ethereumAddress = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination      = 2;
+}
+

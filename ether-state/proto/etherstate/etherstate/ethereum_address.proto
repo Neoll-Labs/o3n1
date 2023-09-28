@@ -1,0 +1,11 @@
+syntax = "proto3";
+package etherstate.etherstate;
+
+option go_package = "github.com/nelsonstr/o3n1/ether-state/x/etherstate/types";
+
+message EthereumAddress {
+  string index = 1; 
+  bool active = 2; 
+  
+}
+
