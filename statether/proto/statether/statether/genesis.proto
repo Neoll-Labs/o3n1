@@ -1,12 +1,16 @@
 syntax = "proto3";
+
 package statether.statether;
 
 import "gogoproto/gogo.proto";
 import "statether/statether/params.proto";
+import "statether/statether/statether.proto";
 
 option go_package = "github.com/nelsonstr/o3n1/statether/x/statether/types";
 
 // GenesisState defines the statether module's genesis state.
 message GenesisState {
-  Params params = 1 [(gogoproto.nullable) = false];
+           Params    params        = 1 [(gogoproto.nullable) = false];
+  repeated Statether statetherList = 2 [(gogoproto.nullable) = false];
 }
+
