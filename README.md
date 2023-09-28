@@ -74,18 +74,36 @@ expected output
 
 ignite scaffold chain github.com/nelsonstr/o3n1/statether 
 
-cd storepositionether
+cd statether
 
-ignite scaffold map ethAddress block:uint nonce:uint storage-position:uint active:bool \
+ignite chain serve 
+ignite chain debug --server --server-address 127.0.0.1:30500
+
+```
+
+http://localhost:1317/
+
+```shell
+
+
+ignite scaffold map statether ethAddress block:uint nonce:uint storage-position:uint active:bool \
     --index index \
-    --module storepositionether \
+    --module statether \
     --no-message    
 
+ignite scaffold message save-ethaddress-state ethAddress block:uint nonce:uint storage-position:uint \
+    --response ethAddress \
+    --module statether
 
-ignite scaffold module storepositionether
- 
+
+ignite scaffold message get-ethaddress-state1 ethAddress \
+    --response data:Statether \
+    --module statether
+
+--------------------------
+
 ignite scaffold type ethaddress-storage-position ethAddress block:uint nonce:uint storage-position:uint active:bool \
-    --module storepositionether
+    --module statether
  
  # save the storage-position for an address
 ignite scaffold message save-ethaddress-state ethAddress block:uint nonce:uint storage-position:uint --response ethAddress \
@@ -115,16 +133,22 @@ ignite scaffold query get-all-ethaddresses-storage-positiona  --response data:Et
 
 # command line
 
-## add ethereum address
-```shell
- ./main tx  storepositionether add-address 0xe8aCaaB95d1102D099F82F03f6106289ee19abA8 --from cosmos1kcr3cx8lxc0w6uxdh93c3mef5v0wkgfcs6vvzq --gas auto
-```
 
 ## save storage position for ethereum address(also store the nonce and block number)
 
 ```shell
-./main tx  storepositionether save-ethaddress-storage-position 0xe8aCaaB95d1102D099F82F03f6106289ee19abA8 0 0 0 --from cosmos1kcr3cx8lxc0w6uxdh93c3mef5v0wkgfcs6vvzq --gas auto
+
+./main tx  statether save-ethaddress-state 0xe8aCaaB95d1102D099F82F03f6106289ee19abA8 0 0 0 --from cosmos17tzhfv8zpjx2weplrgzwetsg5ah53xu9hza0sr --gas auto
+
 ```
+
+
+
+## add ethereum address
+```shell
+ ./main tx statether add-address 0xe8aCaaB95d1102D099F82F03f6106289ee19abA8 --from cosmos17tzhfv8zpjx2weplrgzwetsg5ah53xu9hza0sr --gas auto
+```
+
 
 
 ```go
@@ -143,5 +167,12 @@ var (
 	ErrInvalidBlockNumber     = errors.Register(ModuleName, 1103, "invalid block number")
 	ErrInvalidStoragePosition = errors.Register(ModuleName, 1104, "invalid storage position")
 )
+
+```
+
+
+```shell
+
+curl -X GET "http://localhost:1317/cosmos/auth/v1beta1/accounts/cosmos17tzhfv8zpjx2weplrgzwetsg5ah53xu9hza0sr" -H  "accept: application/json"
 
 ```
