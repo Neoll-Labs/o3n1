@@ -4,7 +4,7 @@ import (
 	errors "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	"regexp"
+	"storepositionether/helpers"
 )
 
 const TypeMsgAddAddress = "add_address"
@@ -45,16 +45,9 @@ func (msg *MsgAddAddress) ValidateBasic() error {
 		return errors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
 
-	if !isValidEthAddress(msg.EthAddress) {
+	if !helpers.IsValidEthAddress(msg.EthAddress) {
 		return errors.Wrapf(ErrInvalidEthAddress, "invalid eth address (%s)", msg.EthAddress)
 	}
 
 	return nil
-}
-
-func isValidEthAddress(address string) bool {
-	// Define a regular expression pattern for a valid Ethereum address
-	ethAddressPattern := regexp.MustCompile("^0x[0-9a-fA-F]{40}$")
-
-	return ethAddressPattern.MatchString(address)
 }
