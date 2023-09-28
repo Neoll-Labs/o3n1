@@ -7,7 +7,6 @@ option go_package = "github.com/nelsonstr/o3n1/statether/x/statether/types";
 // Msg defines the Msg service.
 service Msg {
   rpc SaveEthaddressState (MsgSaveEthaddressState) returns (MsgSaveEthaddressStateResponse);
-  rpc GetEthaddressState  (MsgGetEthaddressState ) returns (MsgGetEthaddressStateResponse );
 }
 message MsgSaveEthaddressState {
   string creator         = 1;
@@ -15,21 +14,10 @@ message MsgSaveEthaddressState {
   uint64 block           = 3;
   uint64 nonce           = 4;
   uint64 storagePosition = 5;
+  bool   active          = 6;
 }
 
 message MsgSaveEthaddressStateResponse {
   string ethAddress = 1;
-}
-
-message MsgGetEthaddressState {
-  string creator         = 1;
-  string ethAddress      = 2;
-  uint64 block           = 3;
-  uint64 nonce           = 4;
-  uint64 storagePosition = 5;
-}
-
-message MsgGetEthaddressStateResponse {
-  bool exists = 1;
 }
 

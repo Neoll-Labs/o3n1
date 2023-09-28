@@ -27,10 +27,6 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgSaveEthaddressState int = 100
 
-	opWeightMsgGetEthaddressState = "op_weight_msg_get_ethaddress_state"
-	// TODO: Determine the simulation weight value
-	defaultWeightMsgGetEthaddressState int = 100
-
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -70,17 +66,6 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		statethersimulation.SimulateMsgSaveEthaddressState(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
-	var weightMsgGetEthaddressState int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgGetEthaddressState, &weightMsgGetEthaddressState, nil,
-		func(_ *rand.Rand) {
-			weightMsgGetEthaddressState = defaultWeightMsgGetEthaddressState
-		},
-	)
-	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgGetEthaddressState,
-		statethersimulation.SimulateMsgGetEthaddressState(am.accountKeeper, am.bankKeeper, am.keeper),
-	))
-
 	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
@@ -94,14 +79,6 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			defaultWeightMsgSaveEthaddressState,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
 				statethersimulation.SimulateMsgSaveEthaddressState(am.accountKeeper, am.bankKeeper, am.keeper)
-				return nil
-			},
-		),
-		simulation.NewWeightedProposalMsg(
-			opWeightMsgGetEthaddressState,
-			defaultWeightMsgGetEthaddressState,
-			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
-				statethersimulation.SimulateMsgGetEthaddressState(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),
