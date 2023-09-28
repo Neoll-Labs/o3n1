@@ -3,11 +3,11 @@ package simulation
 import (
 	"math/rand"
 
-	"github.com/nelsonstr/o3n1/ether-state/x/etherstate/keeper"
-	"github.com/nelsonstr/o3n1/ether-state/x/etherstate/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
+	"github.com/nelsonstr/o3n1/ether-state/x/etherstate/keeper"
+	"github.com/nelsonstr/o3n1/ether-state/x/etherstate/types"
 )
 
 func SimulateMsgDisableEthAddress(

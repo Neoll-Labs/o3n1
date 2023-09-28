@@ -6,8 +6,9 @@ option go_package = "github.com/nelsonstr/o3n1/ether-state/x/etherstate/types";
 
 // Msg defines the Msg service.
 service Msg {
-  rpc EnableEthAddress  (MsgEnableEthAddress ) returns (MsgEnableEthAddressResponse );
-  rpc DisableEthAddress (MsgDisableEthAddress) returns (MsgDisableEthAddressResponse);
+  rpc EnableEthAddress         (MsgEnableEthAddress        ) returns (MsgEnableEthAddressResponse        );
+  rpc DisableEthAddress        (MsgDisableEthAddress       ) returns (MsgDisableEthAddressResponse       );
+  rpc SaveEthereumAddressState (MsgSaveEthereumAddressState) returns (MsgSaveEthereumAddressStateResponse);
 }
 message MsgEnableEthAddress {
   string creator = 1;
@@ -24,6 +25,18 @@ message MsgDisableEthAddress {
 }
 
 message MsgDisableEthAddressResponse {
+  bool success = 1;
+}
+
+message MsgSaveEthereumAddressState {
+  string creator         = 1;
+  string address         = 2;
+  uint64 blockNumber           = 3;
+  uint64 nonce           = 4;
+  uint64 storagePosition = 5;
+}
+
+message MsgSaveEthereumAddressStateResponse {
   bool success = 1;
 }
 

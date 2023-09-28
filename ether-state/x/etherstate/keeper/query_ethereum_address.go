@@ -3,10 +3,10 @@ package keeper
 import (
 	"context"
 
-	"github.com/nelsonstr/o3n1/ether-state/x/etherstate/types"
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/query"
+	"github.com/nelsonstr/o3n1/ether-state/x/etherstate/types"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

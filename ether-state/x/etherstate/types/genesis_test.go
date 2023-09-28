@@ -30,6 +30,14 @@ func TestGenesisState_Validate(t *testing.T) {
 						Index: "1",
 					},
 				},
+				EthereumAddressStateList: []types.EthereumAddressState{
+					{
+						Index: "0",
+					},
+					{
+						Index: "1",
+					},
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
@@ -38,6 +46,20 @@ func TestGenesisState_Validate(t *testing.T) {
 			desc: "duplicated ethereumAddress",
 			genState: &types.GenesisState{
 				EthereumAddressList: []types.EthereumAddress{
+					{
+						Index: "0",
+					},
+					{
+						Index: "0",
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated ethereumAddressState",
+			genState: &types.GenesisState{
+				EthereumAddressStateList: []types.EthereumAddressState{
 					{
 						Index: "0",
 					},

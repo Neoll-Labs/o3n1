@@ -10,8 +10,7 @@ import (
 func (k msgServer) DisableEthAddress(goCtx context.Context, msg *types.MsgDisableEthAddress) (*types.MsgDisableEthAddressResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	// TODO: ✓ Handling the message
-	_ = ctx
+	// DONE: ✓ Handling the message
 
 	k.Keeper.SetEthereumAddress(ctx, types.EthereumAddress{
 		Index:  msg.Address,

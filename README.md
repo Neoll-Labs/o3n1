@@ -27,8 +27,6 @@ it should be stored on your blockchain along with any necessary metadata that ca
 
 * suspend the Ethereum address monitoring
 
-* remove the Ethereum address monitoring
-
 * Save Ethereum *address storage position* (state) with the block number and nonce
 
 * Get Ethereum state from blockchain
@@ -104,97 +102,63 @@ ignite scaffold message enable-eth-address  address --response success:bool --mo
 ignite scaffold message disable-eth-address address --response success:bool --module ether-state
 
 
+```
 
+### command line to enable / disable the address
+```shell
+go build -o ether-state cmd/ether-stated/main.go
+
+./ether-state query etherstate list-ethereum-address
+
+./ether-state tx etherstate enable-eth-address 0xe8aCaaB95d1102D099F82F03f6106289ee19abA8  --from cosmos10wtz2ckpzzgek0n4w4mpy4mrrnpwu3zx6nxm32 --gas auto  
+./ether-state query etherstate show-ethereum-address  0xe8aCaaB95d1102D099F82F03f6106289ee19abA8
+
+./ether-state tx etherstate disable-eth-address 0xe8aCaaB95d1102D099F82F03f6106289ee19abA8  --from cosmos10wtz2ckpzzgek0n4w4mpy4mrrnpwu3zx6nxm32 --gas auto  
+./ether-state query etherstate show-ethereum-address  0xe8aCaaB95d1102D099F82F03f6106289ee19abA8
+
+
+./ether-state query etherstate list-ethereum-address-state
+
+```
+
+## save state
+
+```shell
 # eth address is the index
-ignite scaffold map statether state:uint block:uint nonce:uint \
+ignite scaffold map ethereum-address-state state:uint blockNumber:uint nonce:uint \
     --index index \
     --module ether-state \
     --no-message
 
-ignite scaffold message save-ethaddress-state ethAddress block:uint nonce:uint storage-position:uint \
-    --response ethAddress \
-    --module statether
+ignite scaffold message save-ethereum-address-state address blockNumber:uint nonce:uint storage-position:uint \
+    --response success:bool \
+    --module ether-state
 
-
-ignite scaffold message get-ethaddress-state ethAddress \
-    --response data:Statether \
-    --module statether
-
---------------------------
-
-ignite scaffold type ethaddress-storage-position ethAddress block:uint nonce:uint storage-position:uint active:bool \
-    --module statether
- 
- # save the storage-position for an address
-ignite scaffold message save-ethaddress-state ethAddress block:uint nonce:uint storage-position:uint --response ethAddress \
-    --module statether
-
-#get the state for an address
-ignite scaffold query get-ethaddress-state ethAddress --response data:EthaddressStoragePosition\
-    --module statether
-
-
-
-# save the storage-position for an address
-ignite scaffold message save-ethaddress-state ethAddress block:uint nonce:uint storage-position:uint --response ethAddress \
-    --module storepositionether
-
-
-
-# display addresses information
-ignite scaffold query get-all-ethaddresses-storage-positiona  --response data:EthaddressStoragePosition --paginated\
-    --module storepositionether
 ```
 
-
-# command line
-
-
-##  ethereum address enable
-
+### command save state of ethereum address
 ```shell
+# build
+go build -o ether-state cmd/ether-stated/main.go
 
-./main tx etherstate disable-eth-address 0xe8aCaaB95d1102D099F82F03f6106289ee19abA8  --from cosmos1ke87p8tf0a28v4muvezhrxz9r93ewddg3q4ag6 --gas auto  
-./main tx etherstate enable-eth-address 0xe8aCaaB95d1102D099F82F03f6106289ee19abA8  --from cosmos1ke87p8tf0a28v4muvezhrxz9r93ewddg3q4ag6 --gas auto  
+# enable an address
+./ether-state tx etherstate enable-eth-address 0xe8aCaaB95d1102D099F82F03f6106289ee19abA8  --from cosmos10wtz2ckpzzgek0n4w4mpy4mrrnpwu3zx6nxm32 --gas auto  
 
-
-./main query etherstate show-statether 0xe8aCaaB95d1102D099F82F03f6106289ee19abA8
-
-
-
-```
-
+# save state
+./ether-state tx etherstate save-ethereum-address-state  0xe8aCaaB95d1102D099F82F03f6106289ee19abA8 0 0 0 --from cosmos10wtz2ckpzzgek0n4w4mpy4mrrnpwu3zx6nxm32 --gas auto
+./ether-state query etherstate show-ethereum-address-state  0xe8aCaaB95d1102D099F82F03f6106289ee19abA8
 
 
-## add ethereum address
-```shell
- ./main tx statether add-address 0xe8aCaaB95d1102D099F82F03f6106289ee19abA8 --from cosmos17tzhfv8zpjx2weplrgzwetsg5ah53xu9hza0sr --gas auto
-```
+# enable an address
+./ether-state tx etherstate enable-eth-address 0xe8aCaaB95d1102D099F82F03f6106289ee19abA1  --from cosmos10wtz2ckpzzgek0n4w4mpy4mrrnpwu3zx6nxm32 --gas auto  
+
+# save state
+./ether-state tx etherstate save-ethereum-address-state  0xe8aCaaB95d1102D099F82F03f6106289ee19abA1 0 0 0 --from cosmos10wtz2ckpzzgek0n4w4mpy4mrrnpwu3zx6nxm32 --gas auto
+./ether-state query etherstate show-ethereum-address-state  0xe8aCaaB95d1102D099F82F03f6106289ee19abA1
 
 
-
-```go
-package types
-
-// DONTCOVER
-
-import (
-	"cosmossdk.io/errors"
-)
-
-// x/statether module sentinel errors
-var (
-	ErrInvalidEthereumAddress = errors.Register(ModuleName, 1101, "invalid ethereum address")
-	ErrInvalidNonce           = errors.Register(ModuleName, 1102, "invalid nonce")
-	ErrInvalidBlockNumber     = errors.Register(ModuleName, 1103, "invalid block number")
-	ErrInvalidStoragePosition = errors.Register(ModuleName, 1104, "invalid storage position")
-)
+# list all 
+./ether-state query etherstate list-ethereum-address-state
 
 ```
-
-
-```shell
-
-curl -X GET "http://localhost:1317/cosmos/auth/v1beta1/accounts/cosmos17tzhfv8zpjx2weplrgzwetsg5ah53xu9hza0sr" -H  "accept: application/json"
-
-```
+   

@@ -10,6 +10,7 @@ import (
 func RegisterCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterConcrete(&MsgEnableEthAddress{}, "etherstate/EnableEthAddress", nil)
 	cdc.RegisterConcrete(&MsgDisableEthAddress{}, "etherstate/DisableEthAddress", nil)
+	cdc.RegisterConcrete(&MsgSaveEthereumAddressState{}, "etherstate/SaveEthereumAddressState", nil)
 	// this line is used by starport scaffolding # 2
 }
 
@@ -19,6 +20,9 @@ func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	)
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgDisableEthAddress{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgSaveEthereumAddressState{},
 	)
 	// this line is used by starport scaffolding # 3
 

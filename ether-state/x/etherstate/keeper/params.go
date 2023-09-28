@@ -1,8 +1,8 @@
 package keeper
 
 import (
-	"github.com/nelsonstr/o3n1/ether-state/x/etherstate/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/nelsonstr/o3n1/ether-state/x/etherstate/types"
 )
 
 // GetParams get all parameters as types.Params

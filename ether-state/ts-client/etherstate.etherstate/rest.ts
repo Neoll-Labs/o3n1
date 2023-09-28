@@ -14,11 +14,28 @@ export interface EtherstateEthereumAddress {
   active?: boolean;
 }
 
+export interface EtherstateEthereumAddressState {
+  index?: string;
+
+  /** @format uint64 */
+  state?: string;
+
+  /** @format uint64 */
+  block?: string;
+
+  /** @format uint64 */
+  nonce?: string;
+}
+
 export interface EtherstateMsgDisableEthAddressResponse {
   success?: boolean;
 }
 
 export interface EtherstateMsgEnableEthAddressResponse {
+  success?: boolean;
+}
+
+export interface EtherstateMsgSaveEthereumAddressStateResponse {
   success?: boolean;
 }
 
@@ -42,8 +59,27 @@ export interface EtherstateQueryAllEthereumAddressResponse {
   pagination?: V1Beta1PageResponse;
 }
 
+export interface EtherstateQueryAllEthereumAddressStateResponse {
+  ethereumAddressState?: EtherstateEthereumAddressState[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
 export interface EtherstateQueryGetEthereumAddressResponse {
   ethereumAddress?: EtherstateEthereumAddress;
+}
+
+export interface EtherstateQueryGetEthereumAddressStateResponse {
+  ethereumAddressState?: EtherstateEthereumAddressState;
 }
 
 /**
@@ -314,6 +350,47 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryParams = (params: RequestParams = {}) =>
     this.request<EtherstateQueryParamsResponse, RpcStatus>({
       path: `/ether-state/etherstate/params`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryEthereumAddressStateAll
+   * @request GET:/o3n1/ether-state/etherstate/ethereum_address_state
+   */
+  queryEthereumAddressStateAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<EtherstateQueryAllEthereumAddressStateResponse, RpcStatus>({
+      path: `/o3n1/ether-state/etherstate/ethereum_address_state`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryEthereumAddressState
+   * @summary Queries a list of EthereumAddressState items.
+   * @request GET:/o3n1/ether-state/etherstate/ethereum_address_state/{index}
+   */
+  queryEthereumAddressState = (index: string, params: RequestParams = {}) =>
+    this.request<EtherstateQueryGetEthereumAddressStateResponse, RpcStatus>({
+      path: `/o3n1/ether-state/etherstate/ethereum_address_state/${index}`,
       method: "GET",
       format: "json",
       ...params,

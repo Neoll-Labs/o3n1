@@ -297,6 +297,190 @@ func (m *QueryAllEthereumAddressResponse) GetPagination() *query.PageResponse {
 	return nil
 }
 
+type QueryGetEthereumAddressStateRequest struct {
+	Index string `protobuf:"bytes,1,opt,name=index,proto3" json:"index,omitempty"`
+}
+
+func (m *QueryGetEthereumAddressStateRequest) Reset()         { *m = QueryGetEthereumAddressStateRequest{} }
+func (m *QueryGetEthereumAddressStateRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryGetEthereumAddressStateRequest) ProtoMessage()    {}
+func (*QueryGetEthereumAddressStateRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f54477c8a48c0944, []int{6}
+}
+func (m *QueryGetEthereumAddressStateRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryGetEthereumAddressStateRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryGetEthereumAddressStateRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryGetEthereumAddressStateRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetEthereumAddressStateRequest.Merge(m, src)
+}
+func (m *QueryGetEthereumAddressStateRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryGetEthereumAddressStateRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetEthereumAddressStateRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryGetEthereumAddressStateRequest proto.InternalMessageInfo
+
+func (m *QueryGetEthereumAddressStateRequest) GetIndex() string {
+	if m != nil {
+		return m.Index
+	}
+	return ""
+}
+
+type QueryGetEthereumAddressStateResponse struct {
+	EthereumAddressState EthereumAddressState `protobuf:"bytes,1,opt,name=ethereumAddressState,proto3" json:"ethereumAddressState"`
+}
+
+func (m *QueryGetEthereumAddressStateResponse) Reset()         { *m = QueryGetEthereumAddressStateResponse{} }
+func (m *QueryGetEthereumAddressStateResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryGetEthereumAddressStateResponse) ProtoMessage()    {}
+func (*QueryGetEthereumAddressStateResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f54477c8a48c0944, []int{7}
+}
+func (m *QueryGetEthereumAddressStateResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryGetEthereumAddressStateResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryGetEthereumAddressStateResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryGetEthereumAddressStateResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetEthereumAddressStateResponse.Merge(m, src)
+}
+func (m *QueryGetEthereumAddressStateResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryGetEthereumAddressStateResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetEthereumAddressStateResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryGetEthereumAddressStateResponse proto.InternalMessageInfo
+
+func (m *QueryGetEthereumAddressStateResponse) GetEthereumAddressState() EthereumAddressState {
+	if m != nil {
+		return m.EthereumAddressState
+	}
+	return EthereumAddressState{}
+}
+
+type QueryAllEthereumAddressStateRequest struct {
+	Pagination *query.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
+}
+
+func (m *QueryAllEthereumAddressStateRequest) Reset()         { *m = QueryAllEthereumAddressStateRequest{} }
+func (m *QueryAllEthereumAddressStateRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryAllEthereumAddressStateRequest) ProtoMessage()    {}
+func (*QueryAllEthereumAddressStateRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f54477c8a48c0944, []int{8}
+}
+func (m *QueryAllEthereumAddressStateRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryAllEthereumAddressStateRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryAllEthereumAddressStateRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryAllEthereumAddressStateRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllEthereumAddressStateRequest.Merge(m, src)
+}
+func (m *QueryAllEthereumAddressStateRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryAllEthereumAddressStateRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllEthereumAddressStateRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryAllEthereumAddressStateRequest proto.InternalMessageInfo
+
+func (m *QueryAllEthereumAddressStateRequest) GetPagination() *query.PageRequest {
+	if m != nil {
+		return m.Pagination
+	}
+	return nil
+}
+
+type QueryAllEthereumAddressStateResponse struct {
+	EthereumAddressState []EthereumAddressState `protobuf:"bytes,1,rep,name=ethereumAddressState,proto3" json:"ethereumAddressState"`
+	Pagination           *query.PageResponse    `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
+}
+
+func (m *QueryAllEthereumAddressStateResponse) Reset()         { *m = QueryAllEthereumAddressStateResponse{} }
+func (m *QueryAllEthereumAddressStateResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryAllEthereumAddressStateResponse) ProtoMessage()    {}
+func (*QueryAllEthereumAddressStateResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f54477c8a48c0944, []int{9}
+}
+func (m *QueryAllEthereumAddressStateResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryAllEthereumAddressStateResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryAllEthereumAddressStateResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryAllEthereumAddressStateResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllEthereumAddressStateResponse.Merge(m, src)
+}
+func (m *QueryAllEthereumAddressStateResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryAllEthereumAddressStateResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllEthereumAddressStateResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryAllEthereumAddressStateResponse proto.InternalMessageInfo
+
+func (m *QueryAllEthereumAddressStateResponse) GetEthereumAddressState() []EthereumAddressState {
+	if m != nil {
+		return m.EthereumAddressState
+	}
+	return nil
+}
+
+func (m *QueryAllEthereumAddressStateResponse) GetPagination() *query.PageResponse {
+	if m != nil {
+		return m.Pagination
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*QueryParamsRequest)(nil), "etherstate.etherstate.QueryParamsRequest")
 	proto.RegisterType((*QueryParamsResponse)(nil), "etherstate.etherstate.QueryParamsResponse")
@@ -304,44 +488,57 @@ func init() {
 	proto.RegisterType((*QueryGetEthereumAddressResponse)(nil), "etherstate.etherstate.QueryGetEthereumAddressResponse")
 	proto.RegisterType((*QueryAllEthereumAddressRequest)(nil), "etherstate.etherstate.QueryAllEthereumAddressRequest")
 	proto.RegisterType((*QueryAllEthereumAddressResponse)(nil), "etherstate.etherstate.QueryAllEthereumAddressResponse")
+	proto.RegisterType((*QueryGetEthereumAddressStateRequest)(nil), "etherstate.etherstate.QueryGetEthereumAddressStateRequest")
+	proto.RegisterType((*QueryGetEthereumAddressStateResponse)(nil), "etherstate.etherstate.QueryGetEthereumAddressStateResponse")
+	proto.RegisterType((*QueryAllEthereumAddressStateRequest)(nil), "etherstate.etherstate.QueryAllEthereumAddressStateRequest")
+	proto.RegisterType((*QueryAllEthereumAddressStateResponse)(nil), "etherstate.etherstate.QueryAllEthereumAddressStateResponse")
 }
 
 func init() { proto.RegisterFile("etherstate/etherstate/query.proto", fileDescriptor_f54477c8a48c0944) }
 
 var fileDescriptor_f54477c8a48c0944 = []byte{
-	// 512 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x94, 0xb1, 0x6f, 0x13, 0x31,
-	0x14, 0xc6, 0xe3, 0xd2, 0x46, 0xc2, 0x0c, 0x95, 0x4c, 0x90, 0x50, 0x04, 0xd7, 0xe2, 0xa1, 0x94,
-	0x08, 0xec, 0x26, 0x15, 0x55, 0x25, 0xa6, 0x54, 0x82, 0xae, 0xe5, 0x06, 0x06, 0x16, 0xe4, 0x34,
-	0x4f, 0x97, 0x93, 0x2e, 0xf6, 0xf5, 0xec, 0xa0, 0x46, 0x88, 0x85, 0x01, 0x56, 0x24, 0xfe, 0x16,
-	0x16, 0x46, 0xa6, 0x8e, 0x95, 0x58, 0x98, 0x10, 0x4a, 0xf8, 0x43, 0x50, 0x6c, 0x43, 0x92, 0x23,
-	0x0e, 0x41, 0x6c, 0xce, 0xdd, 0x7b, 0xdf, 0xfb, 0x7d, 0xf7, 0x3e, 0x07, 0xdf, 0x01, 0xd3, 0x83,
-	0x42, 0x1b, 0x61, 0x80, 0xcf, 0x1c, 0xcf, 0x06, 0x50, 0x0c, 0x59, 0x5e, 0x28, 0xa3, 0xc8, 0x8d,
-	0xe9, 0x73, 0x36, 0x3d, 0xd6, 0x6b, 0x89, 0x4a, 0x94, 0xad, 0xe0, 0x93, 0x93, 0x2b, 0xae, 0xdf,
-	0x4a, 0x94, 0x4a, 0x32, 0xe0, 0x22, 0x4f, 0xb9, 0x90, 0x52, 0x19, 0x61, 0x52, 0x25, 0xb5, 0x7f,
-	0xdb, 0x38, 0x55, 0xba, 0xaf, 0x34, 0xef, 0x08, 0xed, 0x67, 0xf0, 0x97, 0xcd, 0x0e, 0x18, 0xd1,
-	0xe4, 0xb9, 0x48, 0x52, 0x69, 0x8b, 0x7d, 0x2d, 0x5d, 0x4c, 0x96, 0x8b, 0x42, 0xf4, 0x7f, 0xe9,
-	0xdd, 0x5f, 0x5c, 0x63, 0x8f, 0x30, 0xe8, 0xbf, 0x10, 0xdd, 0x6e, 0x01, 0xda, 0x57, 0xd3, 0x1a,
-	0x26, 0x4f, 0x27, 0x33, 0x4f, 0xac, 0x44, 0x0c, 0x67, 0x03, 0xd0, 0x86, 0xc6, 0xf8, 0xfa, 0xdc,
-	0x53, 0x9d, 0x2b, 0xa9, 0x81, 0x3c, 0xc2, 0x55, 0x37, 0xea, 0x26, 0xda, 0x46, 0xbb, 0xd7, 0x5a,
-	0xb7, 0xd9, 0xc2, 0xcf, 0xc0, 0x5c, 0xdb, 0xd1, 0xfa, 0xc5, 0xb7, 0xad, 0x4a, 0xec, 0x5b, 0xe8,
-	0x01, 0x8e, 0xac, 0xe6, 0x31, 0x98, 0xc7, 0x9e, 0xa5, 0xed, 0x50, 0xfc, 0x54, 0x52, 0xc3, 0x1b,
-	0xa9, 0xec, 0xc2, 0xb9, 0x55, 0xbf, 0x1a, 0xbb, 0x1f, 0x74, 0x88, 0xb7, 0x82, 0x7d, 0x9e, 0xeb,
-	0x19, 0xde, 0x84, 0xf9, 0x57, 0x1e, 0x70, 0x27, 0x00, 0x58, 0x12, 0xf2, 0xa4, 0x65, 0x11, 0xda,
-	0xf3, 0xc8, 0xed, 0x2c, 0x0b, 0x20, 0x3f, 0xc1, 0x78, 0xba, 0xa4, 0xdf, 0x43, 0xdd, 0x46, 0xd9,
-	0x64, 0xa3, 0xcc, 0xa5, 0xc6, 0x6f, 0x94, 0x9d, 0x88, 0x04, 0x7c, 0x6f, 0x3c, 0xd3, 0x49, 0x3f,
-	0x23, 0xef, 0x72, 0xd1, 0xa8, 0x65, 0x2e, 0xaf, 0xfc, 0xb7, 0x4b, 0x72, 0x3c, 0xe7, 0x61, 0xcd,
-	0x7a, 0xb8, 0xfb, 0x57, 0x0f, 0x0e, 0x6a, 0xd6, 0x44, 0xeb, 0xed, 0x3a, 0xde, 0xb0, 0x26, 0xc8,
-	0x3b, 0x84, 0xab, 0x2e, 0x04, 0xe4, 0x5e, 0x00, 0xee, 0xcf, 0xd4, 0xd5, 0x1b, 0xab, 0x94, 0xba,
-	0xb9, 0x74, 0xe7, 0xcd, 0x97, 0x1f, 0x1f, 0xd6, 0xb6, 0x49, 0xe4, 0x82, 0xfd, 0x20, 0x70, 0x27,
-	0xc8, 0x27, 0x84, 0x37, 0x4b, 0xdf, 0x81, 0x3c, 0x5c, 0x36, 0x27, 0x18, 0xcf, 0xfa, 0xc1, 0xbf,
-	0xb6, 0x79, 0xd4, 0x43, 0x8b, 0xda, 0x22, 0x7b, 0x21, 0xd4, 0xf2, 0xd5, 0xe4, 0xaf, 0x6c, 0xf2,
-	0x5f, 0x93, 0x8f, 0x08, 0x93, 0x92, 0x6a, 0x3b, 0xcb, 0x96, 0xf3, 0x07, 0xb3, 0xba, 0x9c, 0x3f,
-	0x9c, 0x3b, 0xba, 0x67, 0xf9, 0x1b, 0x64, 0x77, 0x55, 0xfe, 0xa3, 0xf8, 0x62, 0x14, 0xa1, 0xcb,
-	0x51, 0x84, 0xbe, 0x8f, 0x22, 0xf4, 0x7e, 0x1c, 0x55, 0x2e, 0xc7, 0x51, 0xe5, 0xeb, 0x38, 0xaa,
-	0x3c, 0x3f, 0x4c, 0x52, 0xd3, 0x1b, 0x74, 0xd8, 0xa9, 0xea, 0x73, 0x09, 0x99, 0x56, 0x52, 0x9b,
-	0x82, 0xab, 0x7d, 0xd9, 0x9c, 0x13, 0x3f, 0x9f, 0x95, 0x37, 0xc3, 0x1c, 0x74, 0xa7, 0x6a, 0xff,
-	0xaf, 0xf6, 0x7f, 0x06, 0x00, 0x00, 0xff, 0xff, 0xf5, 0x57, 0x50, 0x06, 0x9d, 0x05, 0x00, 0x00,
+	// 646 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x96, 0xcf, 0x6b, 0x13, 0x41,
+	0x14, 0xc7, 0x33, 0xad, 0xad, 0x38, 0x1e, 0x0a, 0x63, 0x44, 0x09, 0xba, 0xad, 0xa3, 0xd4, 0x5a,
+	0x75, 0xb7, 0x49, 0x68, 0x29, 0x0d, 0x1e, 0x52, 0xd1, 0x5e, 0xeb, 0x0a, 0x1e, 0xbc, 0x94, 0x49,
+	0x33, 0x6c, 0x02, 0x9b, 0x9d, 0xed, 0xce, 0x44, 0x1a, 0xc4, 0x8b, 0x17, 0x4f, 0x82, 0xe0, 0x1f,
+	0xe2, 0xc9, 0x8b, 0x47, 0x4f, 0xbd, 0x59, 0x50, 0xc4, 0x93, 0x48, 0xe2, 0x1f, 0x22, 0x99, 0x99,
+	0x34, 0xbf, 0x76, 0x36, 0x9b, 0x9a, 0xdb, 0x64, 0xe7, 0xfd, 0xf8, 0x7c, 0xdf, 0x7b, 0xfb, 0xb2,
+	0xf0, 0x16, 0x15, 0x35, 0x1a, 0x71, 0x41, 0x04, 0x75, 0x06, 0x8e, 0x47, 0x4d, 0x1a, 0xb5, 0xec,
+	0x30, 0x62, 0x82, 0xa1, 0xab, 0xfd, 0xe7, 0x76, 0xff, 0x98, 0xcb, 0x7a, 0xcc, 0x63, 0xd2, 0xc2,
+	0xe9, 0x9e, 0x94, 0x71, 0xee, 0x86, 0xc7, 0x98, 0xe7, 0x53, 0x87, 0x84, 0x75, 0x87, 0x04, 0x01,
+	0x13, 0x44, 0xd4, 0x59, 0xc0, 0xf5, 0xed, 0xfa, 0x21, 0xe3, 0x0d, 0xc6, 0x9d, 0x0a, 0xe1, 0x3a,
+	0x87, 0xf3, 0x2a, 0x5f, 0xa1, 0x82, 0xe4, 0x9d, 0x90, 0x78, 0xf5, 0x40, 0x1a, 0x6b, 0x5b, 0x1c,
+	0x4f, 0x16, 0x92, 0x88, 0x34, 0x7a, 0xf1, 0x1e, 0xc4, 0xdb, 0xc8, 0x23, 0x6d, 0x36, 0x0e, 0x48,
+	0xb5, 0x1a, 0x51, 0xde, 0xb3, 0x2e, 0xa4, 0xb3, 0x3e, 0x50, 0x52, 0xa5, 0x0f, 0xce, 0x42, 0xf4,
+	0xac, 0xcb, 0xb9, 0x2f, 0xd3, 0xba, 0xf4, 0xa8, 0x49, 0xb9, 0xc0, 0x2e, 0xbc, 0x32, 0xf4, 0x94,
+	0x87, 0x2c, 0xe0, 0x14, 0x95, 0xe0, 0xa2, 0xc2, 0xbb, 0x0e, 0x56, 0xc0, 0xda, 0xe5, 0xc2, 0x4d,
+	0x3b, 0xb6, 0x74, 0xb6, 0x72, 0xdb, 0xbd, 0x70, 0xf2, 0x7b, 0x39, 0xe3, 0x6a, 0x17, 0xbc, 0x05,
+	0x2d, 0x19, 0x73, 0x8f, 0x8a, 0x27, 0x9a, 0xa8, 0xac, 0x80, 0x74, 0x56, 0x94, 0x85, 0x0b, 0xf5,
+	0xa0, 0x4a, 0x8f, 0x65, 0xf4, 0x4b, 0xae, 0xfa, 0x81, 0x5b, 0x70, 0xd9, 0xe8, 0xa7, 0xb9, 0x5e,
+	0xc0, 0x25, 0x3a, 0x7c, 0xa5, 0x01, 0x57, 0x0d, 0x80, 0x23, 0x81, 0x34, 0xe9, 0x68, 0x10, 0x5c,
+	0xd3, 0xc8, 0x65, 0xdf, 0x37, 0x20, 0x3f, 0x85, 0xb0, 0xdf, 0xd8, 0xb3, 0xa4, 0x6a, 0x0a, 0xec,
+	0xee, 0x14, 0xd8, 0x6a, 0xd2, 0xf4, 0x14, 0xd8, 0xfb, 0xc4, 0xa3, 0xda, 0xd7, 0x1d, 0xf0, 0xc4,
+	0x5f, 0x81, 0x56, 0x19, 0x97, 0x2a, 0x49, 0xe5, 0xfc, 0x7f, 0xab, 0x44, 0x7b, 0x43, 0x1a, 0xe6,
+	0xa4, 0x86, 0xbb, 0x13, 0x35, 0x28, 0xa8, 0x21, 0x11, 0x25, 0x78, 0xdb, 0xd0, 0xa9, 0xe7, 0x5d,
+	0x9e, 0xe4, 0x36, 0xbf, 0x07, 0xf0, 0x4e, 0xb2, 0xb7, 0x2e, 0x03, 0x85, 0x59, 0x1a, 0x73, 0xaf,
+	0x8b, 0x7f, 0x3f, 0x5d, 0x2d, 0xa4, 0x8b, 0x2e, 0x48, 0x6c, 0x38, 0xdc, 0xd0, 0x62, 0xc6, 0x1b,
+	0x32, 0x24, 0x66, 0x56, 0x03, 0xf0, 0xb3, 0x27, 0xdf, 0x98, 0x6f, 0xa2, 0xfc, 0xf9, 0x19, 0xca,
+	0x9f, 0xd9, 0x50, 0x14, 0x3e, 0x5d, 0x84, 0x0b, 0x52, 0x18, 0x7a, 0x07, 0xe0, 0xa2, 0xda, 0x0c,
+	0xe8, 0x9e, 0x01, 0x73, 0x7c, 0x15, 0xe5, 0xd6, 0xd3, 0x98, 0xaa, 0xbc, 0x78, 0xf5, 0xed, 0xf7,
+	0xbf, 0x1f, 0xe7, 0x56, 0x90, 0xa5, 0x76, 0xde, 0x43, 0xc3, 0x72, 0x45, 0x5f, 0x00, 0x5c, 0x1a,
+	0xa9, 0x08, 0xda, 0x4c, 0xca, 0x63, 0xdc, 0x59, 0xb9, 0xad, 0x69, 0xdd, 0x34, 0xea, 0xb6, 0x44,
+	0x2d, 0xa0, 0x0d, 0x13, 0xea, 0xe8, 0xd6, 0x76, 0x5e, 0xcb, 0xf7, 0xe4, 0x0d, 0xfa, 0x0c, 0x20,
+	0x1a, 0x89, 0x5a, 0xf6, 0xfd, 0x64, 0x7e, 0xe3, 0x02, 0x4b, 0xe6, 0x37, 0x2f, 0x23, 0xbc, 0x21,
+	0xf9, 0xd7, 0xd1, 0x5a, 0x5a, 0x7e, 0xf4, 0x03, 0xc0, 0x6c, 0xdc, 0x18, 0xa2, 0x9d, 0xe9, 0x4a,
+	0x38, 0xf8, 0xfa, 0xe5, 0x4a, 0xe7, 0xf2, 0xd5, 0x1a, 0x1e, 0x4b, 0x0d, 0x8f, 0x50, 0xc9, 0x61,
+	0xc5, 0x20, 0x9f, 0x56, 0x88, 0xfa, 0xfb, 0x3c, 0x6b, 0xc7, 0x37, 0x00, 0xaf, 0xc5, 0x65, 0xe9,
+	0xf6, 0x64, 0x67, 0xba, 0xe2, 0xa6, 0x57, 0x36, 0x61, 0x49, 0xe0, 0x92, 0x54, 0xb6, 0x89, 0x8a,
+	0xe7, 0x50, 0xb6, 0xeb, 0x9e, 0xb4, 0x2d, 0x70, 0xda, 0xb6, 0xc0, 0x9f, 0xb6, 0x05, 0x3e, 0x74,
+	0xac, 0xcc, 0x69, 0xc7, 0xca, 0xfc, 0xea, 0x58, 0x99, 0x97, 0xdb, 0x5e, 0x5d, 0xd4, 0x9a, 0x15,
+	0xfb, 0x90, 0x35, 0x9c, 0x80, 0xfa, 0x9c, 0x05, 0x5c, 0x44, 0xe3, 0x29, 0x8e, 0x07, 0x93, 0x88,
+	0x56, 0x48, 0x79, 0x65, 0x51, 0x7e, 0x6d, 0x14, 0xff, 0x05, 0x00, 0x00, 0xff, 0xff, 0xf3, 0x76,
+	0xa0, 0x27, 0x8f, 0x09, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -361,6 +558,9 @@ type QueryClient interface {
 	// Queries a list of EthereumAddress items.
 	EthereumAddress(ctx context.Context, in *QueryGetEthereumAddressRequest, opts ...grpc.CallOption) (*QueryGetEthereumAddressResponse, error)
 	EthereumAddressAll(ctx context.Context, in *QueryAllEthereumAddressRequest, opts ...grpc.CallOption) (*QueryAllEthereumAddressResponse, error)
+	// Queries a list of EthereumAddressState items.
+	EthereumAddressState(ctx context.Context, in *QueryGetEthereumAddressStateRequest, opts ...grpc.CallOption) (*QueryGetEthereumAddressStateResponse, error)
+	EthereumAddressStateAll(ctx context.Context, in *QueryAllEthereumAddressStateRequest, opts ...grpc.CallOption) (*QueryAllEthereumAddressStateResponse, error)
 }
 
 type queryClient struct {
@@ -398,6 +598,24 @@ func (c *queryClient) EthereumAddressAll(ctx context.Context, in *QueryAllEthere
 	return out, nil
 }
 
+func (c *queryClient) EthereumAddressState(ctx context.Context, in *QueryGetEthereumAddressStateRequest, opts ...grpc.CallOption) (*QueryGetEthereumAddressStateResponse, error) {
+	out := new(QueryGetEthereumAddressStateResponse)
+	err := c.cc.Invoke(ctx, "/etherstate.etherstate.Query/EthereumAddressState", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) EthereumAddressStateAll(ctx context.Context, in *QueryAllEthereumAddressStateRequest, opts ...grpc.CallOption) (*QueryAllEthereumAddressStateResponse, error) {
+	out := new(QueryAllEthereumAddressStateResponse)
+	err := c.cc.Invoke(ctx, "/etherstate.etherstate.Query/EthereumAddressStateAll", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 type QueryServer interface {
 	// Parameters queries the parameters of the module.
@@ -405,6 +623,9 @@ type QueryServer interface {
 	// Queries a list of EthereumAddress items.
 	EthereumAddress(context.Context, *QueryGetEthereumAddressRequest) (*QueryGetEthereumAddressResponse, error)
 	EthereumAddressAll(context.Context, *QueryAllEthereumAddressRequest) (*QueryAllEthereumAddressResponse, error)
+	// Queries a list of EthereumAddressState items.
+	EthereumAddressState(context.Context, *QueryGetEthereumAddressStateRequest) (*QueryGetEthereumAddressStateResponse, error)
+	EthereumAddressStateAll(context.Context, *QueryAllEthereumAddressStateRequest) (*QueryAllEthereumAddressStateResponse, error)
 }
 
 // UnimplementedQueryServer can be embedded to have forward compatible implementations.
@@ -419,6 +640,12 @@ func (*UnimplementedQueryServer) EthereumAddress(ctx context.Context, req *Query
 }
 func (*UnimplementedQueryServer) EthereumAddressAll(ctx context.Context, req *QueryAllEthereumAddressRequest) (*QueryAllEthereumAddressResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method EthereumAddressAll not implemented")
+}
+func (*UnimplementedQueryServer) EthereumAddressState(ctx context.Context, req *QueryGetEthereumAddressStateRequest) (*QueryGetEthereumAddressStateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EthereumAddressState not implemented")
+}
+func (*UnimplementedQueryServer) EthereumAddressStateAll(ctx context.Context, req *QueryAllEthereumAddressStateRequest) (*QueryAllEthereumAddressStateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EthereumAddressStateAll not implemented")
 }
 
 func RegisterQueryServer(s grpc1.Server, srv QueryServer) {
@@ -479,6 +706,42 @@ func _Query_EthereumAddressAll_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_EthereumAddressState_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryGetEthereumAddressStateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).EthereumAddressState(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/etherstate.etherstate.Query/EthereumAddressState",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).EthereumAddressState(ctx, req.(*QueryGetEthereumAddressStateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_EthereumAddressStateAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryAllEthereumAddressStateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).EthereumAddressStateAll(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/etherstate.etherstate.Query/EthereumAddressStateAll",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).EthereumAddressStateAll(ctx, req.(*QueryAllEthereumAddressStateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Query_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "etherstate.etherstate.Query",
 	HandlerType: (*QueryServer)(nil),
@@ -494,6 +757,14 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "EthereumAddressAll",
 			Handler:    _Query_EthereumAddressAll_Handler,
+		},
+		{
+			MethodName: "EthereumAddressState",
+			Handler:    _Query_EthereumAddressState_Handler,
+		},
+		{
+			MethodName: "EthereumAddressStateAll",
+			Handler:    _Query_EthereumAddressStateAll_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -703,6 +974,153 @@ func (m *QueryAllEthereumAddressResponse) MarshalToSizedBuffer(dAtA []byte) (int
 	return len(dAtA) - i, nil
 }
 
+func (m *QueryGetEthereumAddressStateRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryGetEthereumAddressStateRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryGetEthereumAddressStateRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Index) > 0 {
+		i -= len(m.Index)
+		copy(dAtA[i:], m.Index)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Index)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryGetEthereumAddressStateResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryGetEthereumAddressStateResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryGetEthereumAddressStateResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	{
+		size, err := m.EthereumAddressState.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarintQuery(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0xa
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryAllEthereumAddressStateRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryAllEthereumAddressStateRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryAllEthereumAddressStateRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		{
+			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintQuery(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryAllEthereumAddressStateResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryAllEthereumAddressStateResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryAllEthereumAddressStateResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		{
+			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintQuery(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.EthereumAddressState) > 0 {
+		for iNdEx := len(m.EthereumAddressState) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.EthereumAddressState[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintQuery(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintQuery(dAtA []byte, offset int, v uint64) int {
 	offset -= sovQuery(v)
 	base := offset
@@ -779,6 +1197,62 @@ func (m *QueryAllEthereumAddressResponse) Size() (n int) {
 	_ = l
 	if len(m.EthereumAddress) > 0 {
 		for _, e := range m.EthereumAddress {
+			l = e.Size()
+			n += 1 + l + sovQuery(uint64(l))
+		}
+	}
+	if m.Pagination != nil {
+		l = m.Pagination.Size()
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryGetEthereumAddressStateRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Index)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryGetEthereumAddressStateResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = m.EthereumAddressState.Size()
+	n += 1 + l + sovQuery(uint64(l))
+	return n
+}
+
+func (m *QueryAllEthereumAddressStateRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		l = m.Pagination.Size()
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryAllEthereumAddressStateResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.EthereumAddressState) > 0 {
+		for _, e := range m.EthereumAddressState {
 			l = e.Size()
 			n += 1 + l + sovQuery(uint64(l))
 		}
@@ -1240,6 +1714,377 @@ func (m *QueryAllEthereumAddressResponse) Unmarshal(dAtA []byte) error {
 			}
 			m.EthereumAddress = append(m.EthereumAddress, EthereumAddress{})
 			if err := m.EthereumAddress[len(m.EthereumAddress)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Pagination == nil {
+				m.Pagination = &query.PageResponse{}
+			}
+			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryGetEthereumAddressStateRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryGetEthereumAddressStateRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryGetEthereumAddressStateRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Index", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Index = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryGetEthereumAddressStateResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryGetEthereumAddressStateResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryGetEthereumAddressStateResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field EthereumAddressState", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.EthereumAddressState.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryAllEthereumAddressStateRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryAllEthereumAddressStateRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryAllEthereumAddressStateRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Pagination == nil {
+				m.Pagination = &query.PageRequest{}
+			}
+			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryAllEthereumAddressStateResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryAllEthereumAddressStateResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryAllEthereumAddressStateResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field EthereumAddressState", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.EthereumAddressState = append(m.EthereumAddressState, EthereumAddressState{})
+			if err := m.EthereumAddressState[len(m.EthereumAddressState)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex

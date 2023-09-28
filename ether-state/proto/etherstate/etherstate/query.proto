@@ -7,6 +7,7 @@ import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "etherstate/etherstate/params.proto";
 import "etherstate/etherstate/ethereum_address.proto";
+import "etherstate/etherstate/ethereum_address_state.proto";
 
 option go_package = "github.com/nelsonstr/o3n1/ether-state/x/etherstate/types";
 
@@ -26,6 +27,16 @@ service Query {
   }
   rpc EthereumAddressAll (QueryAllEthereumAddressRequest) returns (QueryAllEthereumAddressResponse) {
     option (google.api.http).get = "/ether-state/etherstate/ethereum_address";
+  
+  }
+  
+  // Queries a list of EthereumAddressState items.
+  rpc EthereumAddressState    (QueryGetEthereumAddressStateRequest) returns (QueryGetEthereumAddressStateResponse) {
+    option (google.api.http).get = "/o3n1/ether-state/etherstate/ethereum_address_state/{index}";
+  
+  }
+  rpc EthereumAddressStateAll (QueryAllEthereumAddressStateRequest) returns (QueryAllEthereumAddressStateResponse) {
+    option (google.api.http).get = "/o3n1/ether-state/etherstate/ethereum_address_state";
   
   }
 }
@@ -54,5 +65,22 @@ message QueryAllEthereumAddressRequest {
 message QueryAllEthereumAddressResponse {
   repeated EthereumAddress                        ethereumAddress = 1 [(gogoproto.nullable) = false];
            cosmos.base.query.v1beta1.PageResponse pagination      = 2;
+}
+
+message QueryGetEthereumAddressStateRequest {
+  string index = 1;
+}
+
+message QueryGetEthereumAddressStateResponse {
+  EthereumAddressState ethereumAddressState = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllEthereumAddressStateRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllEthereumAddressStateResponse {
+  repeated EthereumAddressState                   ethereumAddressState = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination           = 2;
 }
 

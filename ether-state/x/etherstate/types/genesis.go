@@ -10,7 +10,8 @@ const DefaultIndex uint64 = 1
 // DefaultGenesis returns the default genesis state
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
-		EthereumAddressList: []EthereumAddress{},
+		EthereumAddressList:      []EthereumAddress{},
+		EthereumAddressStateList: []EthereumAddressState{},
 		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}
@@ -28,6 +29,16 @@ func (gs GenesisState) Validate() error {
 			return fmt.Errorf("duplicated index for ethereumAddress")
 		}
 		ethereumAddressIndexMap[index] = struct{}{}
+	}
+	// Check for duplicated index in ethereumAddressState
+	ethereumAddressStateIndexMap := make(map[string]struct{})
+
+	for _, elem := range gs.EthereumAddressStateList {
+		index := string(EthereumAddressStateKey(elem.Index))
+		if _, ok := ethereumAddressStateIndexMap[index]; ok {
+			return fmt.Errorf("duplicated index for ethereumAddressState")
+		}
+		ethereumAddressStateIndexMap[index] = struct{}{}
 	}
 	// this line is used by starport scaffolding # genesis/types/validate
 

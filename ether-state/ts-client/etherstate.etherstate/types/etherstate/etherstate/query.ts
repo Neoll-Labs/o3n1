@@ -2,6 +2,7 @@
 import _m0 from "protobufjs/minimal";
 import { PageRequest, PageResponse } from "../../cosmos/base/query/v1beta1/pagination";
 import { EthereumAddress } from "./ethereum_address";
+import { EthereumAddressState } from "./ethereum_address_state";
 import { Params } from "./params";
 
 export const protobufPackage = "etherstate.etherstate";
@@ -30,6 +31,23 @@ export interface QueryAllEthereumAddressRequest {
 
 export interface QueryAllEthereumAddressResponse {
   ethereumAddress: EthereumAddress[];
+  pagination: PageResponse | undefined;
+}
+
+export interface QueryGetEthereumAddressStateRequest {
+  index: string;
+}
+
+export interface QueryGetEthereumAddressStateResponse {
+  ethereumAddressState: EthereumAddressState | undefined;
+}
+
+export interface QueryAllEthereumAddressStateRequest {
+  pagination: PageRequest | undefined;
+}
+
+export interface QueryAllEthereumAddressStateResponse {
+  ethereumAddressState: EthereumAddressState[];
   pagination: PageResponse | undefined;
 }
 
@@ -345,6 +363,235 @@ export const QueryAllEthereumAddressResponse = {
   },
 };
 
+function createBaseQueryGetEthereumAddressStateRequest(): QueryGetEthereumAddressStateRequest {
+  return { index: "" };
+}
+
+export const QueryGetEthereumAddressStateRequest = {
+  encode(message: QueryGetEthereumAddressStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.index !== "") {
+      writer.uint32(10).string(message.index);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetEthereumAddressStateRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryGetEthereumAddressStateRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.index = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetEthereumAddressStateRequest {
+    return { index: isSet(object.index) ? String(object.index) : "" };
+  },
+
+  toJSON(message: QueryGetEthereumAddressStateRequest): unknown {
+    const obj: any = {};
+    message.index !== undefined && (obj.index = message.index);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryGetEthereumAddressStateRequest>, I>>(
+    object: I,
+  ): QueryGetEthereumAddressStateRequest {
+    const message = createBaseQueryGetEthereumAddressStateRequest();
+    message.index = object.index ?? "";
+    return message;
+  },
+};
+
+function createBaseQueryGetEthereumAddressStateResponse(): QueryGetEthereumAddressStateResponse {
+  return { ethereumAddressState: undefined };
+}
+
+export const QueryGetEthereumAddressStateResponse = {
+  encode(message: QueryGetEthereumAddressStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.ethereumAddressState !== undefined) {
+      EthereumAddressState.encode(message.ethereumAddressState, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetEthereumAddressStateResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryGetEthereumAddressStateResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.ethereumAddressState = EthereumAddressState.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetEthereumAddressStateResponse {
+    return {
+      ethereumAddressState: isSet(object.ethereumAddressState)
+        ? EthereumAddressState.fromJSON(object.ethereumAddressState)
+        : undefined,
+    };
+  },
+
+  toJSON(message: QueryGetEthereumAddressStateResponse): unknown {
+    const obj: any = {};
+    message.ethereumAddressState !== undefined && (obj.ethereumAddressState = message.ethereumAddressState
+      ? EthereumAddressState.toJSON(message.ethereumAddressState)
+      : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryGetEthereumAddressStateResponse>, I>>(
+    object: I,
+  ): QueryGetEthereumAddressStateResponse {
+    const message = createBaseQueryGetEthereumAddressStateResponse();
+    message.ethereumAddressState = (object.ethereumAddressState !== undefined && object.ethereumAddressState !== null)
+      ? EthereumAddressState.fromPartial(object.ethereumAddressState)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseQueryAllEthereumAddressStateRequest(): QueryAllEthereumAddressStateRequest {
+  return { pagination: undefined };
+}
+
+export const QueryAllEthereumAddressStateRequest = {
+  encode(message: QueryAllEthereumAddressStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllEthereumAddressStateRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryAllEthereumAddressStateRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllEthereumAddressStateRequest {
+    return { pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined };
+  },
+
+  toJSON(message: QueryAllEthereumAddressStateRequest): unknown {
+    const obj: any = {};
+    message.pagination !== undefined
+      && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryAllEthereumAddressStateRequest>, I>>(
+    object: I,
+  ): QueryAllEthereumAddressStateRequest {
+    const message = createBaseQueryAllEthereumAddressStateRequest();
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageRequest.fromPartial(object.pagination)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseQueryAllEthereumAddressStateResponse(): QueryAllEthereumAddressStateResponse {
+  return { ethereumAddressState: [], pagination: undefined };
+}
+
+export const QueryAllEthereumAddressStateResponse = {
+  encode(message: QueryAllEthereumAddressStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.ethereumAddressState) {
+      EthereumAddressState.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllEthereumAddressStateResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryAllEthereumAddressStateResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.ethereumAddressState.push(EthereumAddressState.decode(reader, reader.uint32()));
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllEthereumAddressStateResponse {
+    return {
+      ethereumAddressState: Array.isArray(object?.ethereumAddressState)
+        ? object.ethereumAddressState.map((e: any) => EthereumAddressState.fromJSON(e))
+        : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
+    };
+  },
+
+  toJSON(message: QueryAllEthereumAddressStateResponse): unknown {
+    const obj: any = {};
+    if (message.ethereumAddressState) {
+      obj.ethereumAddressState = message.ethereumAddressState.map((e) =>
+        e ? EthereumAddressState.toJSON(e) : undefined
+      );
+    } else {
+      obj.ethereumAddressState = [];
+    }
+    message.pagination !== undefined
+      && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryAllEthereumAddressStateResponse>, I>>(
+    object: I,
+  ): QueryAllEthereumAddressStateResponse {
+    const message = createBaseQueryAllEthereumAddressStateResponse();
+    message.ethereumAddressState = object.ethereumAddressState?.map((e) => EthereumAddressState.fromPartial(e)) || [];
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageResponse.fromPartial(object.pagination)
+      : undefined;
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -352,6 +599,9 @@ export interface Query {
   /** Queries a list of EthereumAddress items. */
   EthereumAddress(request: QueryGetEthereumAddressRequest): Promise<QueryGetEthereumAddressResponse>;
   EthereumAddressAll(request: QueryAllEthereumAddressRequest): Promise<QueryAllEthereumAddressResponse>;
+  /** Queries a list of EthereumAddressState items. */
+  EthereumAddressState(request: QueryGetEthereumAddressStateRequest): Promise<QueryGetEthereumAddressStateResponse>;
+  EthereumAddressStateAll(request: QueryAllEthereumAddressStateRequest): Promise<QueryAllEthereumAddressStateResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -361,6 +611,8 @@ export class QueryClientImpl implements Query {
     this.Params = this.Params.bind(this);
     this.EthereumAddress = this.EthereumAddress.bind(this);
     this.EthereumAddressAll = this.EthereumAddressAll.bind(this);
+    this.EthereumAddressState = this.EthereumAddressState.bind(this);
+    this.EthereumAddressStateAll = this.EthereumAddressStateAll.bind(this);
   }
   Params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
@@ -378,6 +630,18 @@ export class QueryClientImpl implements Query {
     const data = QueryAllEthereumAddressRequest.encode(request).finish();
     const promise = this.rpc.request("etherstate.etherstate.Query", "EthereumAddressAll", data);
     return promise.then((data) => QueryAllEthereumAddressResponse.decode(new _m0.Reader(data)));
+  }
+
+  EthereumAddressState(request: QueryGetEthereumAddressStateRequest): Promise<QueryGetEthereumAddressStateResponse> {
+    const data = QueryGetEthereumAddressStateRequest.encode(request).finish();
+    const promise = this.rpc.request("etherstate.etherstate.Query", "EthereumAddressState", data);
+    return promise.then((data) => QueryGetEthereumAddressStateResponse.decode(new _m0.Reader(data)));
+  }
+
+  EthereumAddressStateAll(request: QueryAllEthereumAddressStateRequest): Promise<QueryAllEthereumAddressStateResponse> {
+    const data = QueryAllEthereumAddressStateRequest.encode(request).finish();
+    const promise = this.rpc.request("etherstate.etherstate.Query", "EthereumAddressStateAll", data);
+    return promise.then((data) => QueryAllEthereumAddressStateResponse.decode(new _m0.Reader(data)));
   }
 }
 

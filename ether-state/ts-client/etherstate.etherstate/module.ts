@@ -8,15 +8,23 @@ import { IgniteClient } from "../client"
 import { MissingWalletError } from "../helpers"
 import { Api } from "./rest";
 import { MsgDisableEthAddress } from "./types/etherstate/etherstate/tx";
+import { MsgSaveEthereumAddressState } from "./types/etherstate/etherstate/tx";
 import { MsgEnableEthAddress } from "./types/etherstate/etherstate/tx";
 
 import { EthereumAddress as typeEthereumAddress} from "./types"
+import { EthereumAddressState as typeEthereumAddressState} from "./types"
 import { Params as typeParams} from "./types"
 
-export { MsgDisableEthAddress, MsgEnableEthAddress };
+export { MsgDisableEthAddress, MsgSaveEthereumAddressState, MsgEnableEthAddress };
 
 type sendMsgDisableEthAddressParams = {
   value: MsgDisableEthAddress,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgSaveEthereumAddressStateParams = {
+  value: MsgSaveEthereumAddressState,
   fee?: StdFee,
   memo?: string
 };
@@ -30,6 +38,10 @@ type sendMsgEnableEthAddressParams = {
 
 type msgDisableEthAddressParams = {
   value: MsgDisableEthAddress,
+};
+
+type msgSaveEthereumAddressStateParams = {
+  value: MsgSaveEthereumAddressState,
 };
 
 type msgEnableEthAddressParams = {
@@ -80,6 +92,20 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
+		async sendMsgSaveEthereumAddressState({ value, fee, memo }: sendMsgSaveEthereumAddressStateParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgSaveEthereumAddressState: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry, prefix});
+				let msg = this.msgSaveEthereumAddressState({ value: MsgSaveEthereumAddressState.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgSaveEthereumAddressState: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
 		async sendMsgEnableEthAddress({ value, fee, memo }: sendMsgEnableEthAddressParams): Promise<DeliverTxResponse> {
 			if (!signer) {
 					throw new Error('TxClient:sendMsgEnableEthAddress: Unable to sign Tx. Signer is not present.')
@@ -100,6 +126,14 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 				return { typeUrl: "/etherstate.etherstate.MsgDisableEthAddress", value: MsgDisableEthAddress.fromPartial( value ) }  
 			} catch (e: any) {
 				throw new Error('TxClient:MsgDisableEthAddress: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgSaveEthereumAddressState({ value }: msgSaveEthereumAddressStateParams): EncodeObject {
+			try {
+				return { typeUrl: "/etherstate.etherstate.MsgSaveEthereumAddressState", value: MsgSaveEthereumAddressState.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgSaveEthereumAddressState: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -134,6 +168,7 @@ class SDKModule {
 		this.updateTX(client);
 		this.structure =  {
 						EthereumAddress: getStructure(typeEthereumAddress.fromPartial({})),
+						EthereumAddressState: getStructure(typeEthereumAddressState.fromPartial({})),
 						Params: getStructure(typeParams.fromPartial({})),
 						
 		};

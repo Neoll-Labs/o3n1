@@ -3,8 +3,8 @@ package types
 import (
 	"testing"
 
-	"github.com/nelsonstr/o3n1/ether-state/testutil/sample"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	"github.com/nelsonstr/o3n1/ether-state/testutil/sample"
 	"github.com/stretchr/testify/require"
 )
 
@@ -20,11 +20,22 @@ func TestMsgEnableEthAddress_ValidateBasic(t *testing.T) {
 				Creator: "invalid_address",
 			},
 			err: sdkerrors.ErrInvalidAddress,
-		}, {
-			name: "valid address",
+		},
+		{
+			name: "invalid eth address",
 			msg: MsgEnableEthAddress{
 				Creator: sample.AccAddress(),
+				Address: "invalid_address",
 			},
+			err: ErrInvalidEthereumAddress,
+		},
+		{
+			name: "valid addresses",
+			msg: MsgEnableEthAddress{
+				Creator: sample.AccAddress(),
+				Address: "0xAAAcE30a1329520a24c6B569ea57989ffa90086A",
+			},
+			err: ErrInvalidEthereumAddress,
 		},
 	}
 	for _, tt := range tests {

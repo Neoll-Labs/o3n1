@@ -3,14 +3,14 @@ package etherstate
 import (
 	"math/rand"
 
-	"github.com/nelsonstr/o3n1/ether-state/testutil/sample"
-	etherstatesimulation "github.com/nelsonstr/o3n1/ether-state/x/etherstate/simulation"
-	"github.com/nelsonstr/o3n1/ether-state/x/etherstate/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
+	"github.com/nelsonstr/o3n1/ether-state/testutil/sample"
+	etherstatesimulation "github.com/nelsonstr/o3n1/ether-state/x/etherstate/simulation"
+	"github.com/nelsonstr/o3n1/ether-state/x/etherstate/types"
 )
 
 // avoid unused import issue
@@ -30,6 +30,10 @@ const (
 	opWeightMsgDisableEthAddress = "op_weight_msg_disable_eth_address"
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgDisableEthAddress int = 100
+
+	opWeightMsgSaveEthereumAddressState = "op_weight_msg_save_ethereum_address_state"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgSaveEthereumAddressState int = 100
 
 	// this line is used by starport scaffolding # simapp/module/const
 )
@@ -81,6 +85,17 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		etherstatesimulation.SimulateMsgDisableEthAddress(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
+	var weightMsgSaveEthereumAddressState int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgSaveEthereumAddressState, &weightMsgSaveEthereumAddressState, nil,
+		func(_ *rand.Rand) {
+			weightMsgSaveEthereumAddressState = defaultWeightMsgSaveEthereumAddressState
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgSaveEthereumAddressState,
+		etherstatesimulation.SimulateMsgSaveEthereumAddressState(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
 	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
@@ -102,6 +117,14 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			defaultWeightMsgDisableEthAddress,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
 				etherstatesimulation.SimulateMsgDisableEthAddress(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgSaveEthereumAddressState,
+			defaultWeightMsgSaveEthereumAddressState,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				etherstatesimulation.SimulateMsgSaveEthereumAddressState(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),

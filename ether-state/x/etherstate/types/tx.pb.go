@@ -219,35 +219,164 @@ func (m *MsgDisableEthAddressResponse) GetSuccess() bool {
 	return false
 }
 
+type MsgSaveEthereumAddressState struct {
+	Creator         string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	Address         string `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
+	BlockNumber     uint64 `protobuf:"varint,3,opt,name=blockNumber,proto3" json:"blockNumber,omitempty"`
+	Nonce           uint64 `protobuf:"varint,4,opt,name=nonce,proto3" json:"nonce,omitempty"`
+	StoragePosition uint64 `protobuf:"varint,5,opt,name=storagePosition,proto3" json:"storagePosition,omitempty"`
+}
+
+func (m *MsgSaveEthereumAddressState) Reset()         { *m = MsgSaveEthereumAddressState{} }
+func (m *MsgSaveEthereumAddressState) String() string { return proto.CompactTextString(m) }
+func (*MsgSaveEthereumAddressState) ProtoMessage()    {}
+func (*MsgSaveEthereumAddressState) Descriptor() ([]byte, []int) {
+	return fileDescriptor_1a2220bdd040cbcf, []int{4}
+}
+func (m *MsgSaveEthereumAddressState) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgSaveEthereumAddressState) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgSaveEthereumAddressState.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgSaveEthereumAddressState) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgSaveEthereumAddressState.Merge(m, src)
+}
+func (m *MsgSaveEthereumAddressState) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgSaveEthereumAddressState) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgSaveEthereumAddressState.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgSaveEthereumAddressState proto.InternalMessageInfo
+
+func (m *MsgSaveEthereumAddressState) GetCreator() string {
+	if m != nil {
+		return m.Creator
+	}
+	return ""
+}
+
+func (m *MsgSaveEthereumAddressState) GetAddress() string {
+	if m != nil {
+		return m.Address
+	}
+	return ""
+}
+
+func (m *MsgSaveEthereumAddressState) GetBlockNumber() uint64 {
+	if m != nil {
+		return m.BlockNumber
+	}
+	return 0
+}
+
+func (m *MsgSaveEthereumAddressState) GetNonce() uint64 {
+	if m != nil {
+		return m.Nonce
+	}
+	return 0
+}
+
+func (m *MsgSaveEthereumAddressState) GetStoragePosition() uint64 {
+	if m != nil {
+		return m.StoragePosition
+	}
+	return 0
+}
+
+type MsgSaveEthereumAddressStateResponse struct {
+	Success bool `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+}
+
+func (m *MsgSaveEthereumAddressStateResponse) Reset()         { *m = MsgSaveEthereumAddressStateResponse{} }
+func (m *MsgSaveEthereumAddressStateResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgSaveEthereumAddressStateResponse) ProtoMessage()    {}
+func (*MsgSaveEthereumAddressStateResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_1a2220bdd040cbcf, []int{5}
+}
+func (m *MsgSaveEthereumAddressStateResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgSaveEthereumAddressStateResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgSaveEthereumAddressStateResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgSaveEthereumAddressStateResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgSaveEthereumAddressStateResponse.Merge(m, src)
+}
+func (m *MsgSaveEthereumAddressStateResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgSaveEthereumAddressStateResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgSaveEthereumAddressStateResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgSaveEthereumAddressStateResponse proto.InternalMessageInfo
+
+func (m *MsgSaveEthereumAddressStateResponse) GetSuccess() bool {
+	if m != nil {
+		return m.Success
+	}
+	return false
+}
+
 func init() {
 	proto.RegisterType((*MsgEnableEthAddress)(nil), "etherstate.etherstate.MsgEnableEthAddress")
 	proto.RegisterType((*MsgEnableEthAddressResponse)(nil), "etherstate.etherstate.MsgEnableEthAddressResponse")
 	proto.RegisterType((*MsgDisableEthAddress)(nil), "etherstate.etherstate.MsgDisableEthAddress")
 	proto.RegisterType((*MsgDisableEthAddressResponse)(nil), "etherstate.etherstate.MsgDisableEthAddressResponse")
+	proto.RegisterType((*MsgSaveEthereumAddressState)(nil), "etherstate.etherstate.MsgSaveEthereumAddressState")
+	proto.RegisterType((*MsgSaveEthereumAddressStateResponse)(nil), "etherstate.etherstate.MsgSaveEthereumAddressStateResponse")
 }
 
 func init() { proto.RegisterFile("etherstate/etherstate/tx.proto", fileDescriptor_1a2220bdd040cbcf) }
 
 var fileDescriptor_1a2220bdd040cbcf = []byte{
-	// 276 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0x4b, 0x2d, 0xc9, 0x48,
-	0x2d, 0x2a, 0x2e, 0x49, 0x2c, 0x49, 0xd5, 0x47, 0x62, 0x96, 0x54, 0xe8, 0x15, 0x14, 0xe5, 0x97,
-	0xe4, 0x0b, 0x89, 0x22, 0x04, 0xf5, 0x10, 0x4c, 0x25, 0x4f, 0x2e, 0x61, 0xdf, 0xe2, 0x74, 0xd7,
-	0xbc, 0xc4, 0xa4, 0x9c, 0x54, 0xd7, 0x92, 0x0c, 0xc7, 0x94, 0x94, 0xa2, 0xd4, 0xe2, 0x62, 0x21,
-	0x09, 0x2e, 0xf6, 0xe4, 0xa2, 0xd4, 0xc4, 0x92, 0xfc, 0x22, 0x09, 0x46, 0x05, 0x46, 0x0d, 0xce,
-	0x20, 0x18, 0x17, 0x24, 0x93, 0x08, 0x51, 0x24, 0xc1, 0x04, 0x91, 0x81, 0x72, 0x95, 0xcc, 0xb9,
-	0xa4, 0xb1, 0x18, 0x15, 0x94, 0x5a, 0x5c, 0x90, 0x9f, 0x57, 0x9c, 0x0a, 0xd2, 0x58, 0x5c, 0x9a,
-	0x9c, 0x0c, 0xd2, 0x08, 0x32, 0x92, 0x23, 0x08, 0xc6, 0x55, 0xf2, 0xe2, 0x12, 0xf1, 0x2d, 0x4e,
-	0x77, 0xc9, 0x2c, 0xa6, 0x82, 0x23, 0x2c, 0xb8, 0x64, 0xb0, 0x99, 0x45, 0xd8, 0x15, 0x46, 0x1f,
-	0x18, 0xb9, 0x98, 0x7d, 0x8b, 0xd3, 0x85, 0x8a, 0xb8, 0x04, 0x30, 0x82, 0x43, 0x4b, 0x0f, 0x6b,
-	0xe8, 0xe9, 0x61, 0xf1, 0xaf, 0x94, 0x11, 0xf1, 0x6a, 0xe1, 0xae, 0x2a, 0xe5, 0x12, 0xc4, 0xf4,
-	0xbe, 0x36, 0x6e, 0x83, 0x30, 0x14, 0x4b, 0x19, 0x93, 0xa0, 0x18, 0x66, 0xad, 0x53, 0xd0, 0x89,
-	0x47, 0x72, 0x8c, 0x17, 0x1e, 0xc9, 0x31, 0x3e, 0x78, 0x24, 0xc7, 0x38, 0xe1, 0xb1, 0x1c, 0xc3,
-	0x85, 0xc7, 0x72, 0x0c, 0x37, 0x1e, 0xcb, 0x31, 0x44, 0x59, 0xa4, 0x67, 0x96, 0x64, 0x94, 0x26,
-	0xe9, 0x25, 0xe7, 0xe7, 0xea, 0xe7, 0xa5, 0xe6, 0x14, 0xe7, 0xe7, 0x15, 0x97, 0x14, 0xe9, 0xe7,
-	0x1b, 0xe7, 0x19, 0x42, 0x12, 0x97, 0x2e, 0x24, 0x75, 0x55, 0xa0, 0x24, 0xb5, 0xca, 0x82, 0xd4,
-	0xe2, 0x24, 0x36, 0x70, 0x72, 0x33, 0x06, 0x04, 0x00, 0x00, 0xff, 0xff, 0xc7, 0x04, 0x8e, 0xc2,
-	0x90, 0x02, 0x00, 0x00,
+	// 388 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x53, 0xcd, 0x4e, 0xf2, 0x40,
+	0x14, 0x65, 0xf8, 0xf9, 0x7e, 0xc6, 0x85, 0x5a, 0x31, 0x69, 0xd0, 0x34, 0xa4, 0x6e, 0x88, 0xc6,
+	0x12, 0x61, 0x21, 0x71, 0x63, 0x34, 0xb2, 0xd0, 0x04, 0x63, 0xca, 0xce, 0x5d, 0x5b, 0x6e, 0x4a,
+	0x23, 0xcc, 0x90, 0xb9, 0x53, 0x83, 0xaf, 0xe0, 0xca, 0x77, 0xf1, 0x25, 0x5c, 0xb2, 0x74, 0x69,
+	0xe0, 0x39, 0x4c, 0x4c, 0x5b, 0xfe, 0x94, 0x82, 0x60, 0xdc, 0xcd, 0xbd, 0xf7, 0x9c, 0xd3, 0x33,
+	0xbd, 0x73, 0xa8, 0x06, 0xb2, 0x09, 0x02, 0xa5, 0x25, 0xa1, 0x38, 0x75, 0x94, 0x5d, 0xa3, 0x23,
+	0xb8, 0xe4, 0xca, 0xf6, 0xa4, 0x69, 0x4c, 0x8e, 0xfa, 0x25, 0xdd, 0xaa, 0xa1, 0x5b, 0x65, 0x96,
+	0xdd, 0x82, 0xaa, 0x6c, 0x9e, 0x35, 0x1a, 0x02, 0x10, 0x15, 0x95, 0xfe, 0x75, 0x04, 0x58, 0x92,
+	0x0b, 0x95, 0xe4, 0x49, 0xe1, 0xbf, 0x39, 0x2a, 0x83, 0x89, 0x15, 0x81, 0xd4, 0x64, 0x34, 0x19,
+	0x96, 0xfa, 0x31, 0xdd, 0x89, 0x91, 0x32, 0x01, 0x3b, 0x9c, 0x21, 0x04, 0x44, 0xf4, 0x1d, 0x27,
+	0x20, 0x06, 0x92, 0xff, 0xcc, 0x51, 0xa9, 0x5f, 0xd1, 0x6c, 0x0d, 0xdd, 0x0b, 0x0f, 0x7f, 0xc1,
+	0x44, 0x85, 0xee, 0xc6, 0x69, 0x2d, 0xe1, 0xe2, 0x99, 0x84, 0xfe, 0xeb, 0xd6, 0x7d, 0xc0, 0x03,
+	0x01, 0x7e, 0x7b, 0x48, 0xae, 0x07, 0x7f, 0xea, 0x27, 0x6e, 0x94, 0x3c, 0x5d, 0xb3, 0x5b, 0xdc,
+	0xb9, 0xbb, 0xf6, 0xdb, 0x36, 0x08, 0x35, 0x95, 0x27, 0x85, 0xb4, 0x39, 0xdd, 0x52, 0xb2, 0x34,
+	0xc3, 0x38, 0x73, 0x40, 0x4d, 0x87, 0xb3, 0xa8, 0x50, 0x0a, 0x74, 0x1d, 0x25, 0x17, 0x96, 0x0b,
+	0x37, 0x1c, 0x3d, 0xe9, 0x71, 0xa6, 0x66, 0xc2, 0xf9, 0xd7, 0xb6, 0x7e, 0x4a, 0xf7, 0x16, 0x98,
+	0xfe, 0xfe, 0xda, 0xa5, 0xf7, 0x24, 0x4d, 0xd5, 0xd0, 0x55, 0x04, 0xdd, 0x98, 0x79, 0x05, 0xfb,
+	0x46, 0xec, 0xa3, 0x31, 0x62, 0xd6, 0x9c, 0x2b, 0x2d, 0x8f, 0x1d, 0xbb, 0xf2, 0xe9, 0xe6, 0xec,
+	0xd6, 0x0f, 0xe6, 0x0b, 0xcd, 0x80, 0x73, 0xe5, 0x15, 0xc0, 0xe3, 0xcf, 0x3e, 0x12, 0xaa, 0xce,
+	0x5d, 0xf3, 0x82, 0x7b, 0xcc, 0xe3, 0xe4, 0x4e, 0x56, 0xe7, 0x8c, 0xcc, 0x9c, 0x9b, 0x2f, 0x7d,
+	0x8d, 0xf4, 0xfa, 0x1a, 0x79, 0xeb, 0x6b, 0xe4, 0x69, 0xa0, 0x25, 0x7a, 0x03, 0x2d, 0xf1, 0x3a,
+	0xd0, 0x12, 0xb7, 0x15, 0xd7, 0x93, 0x4d, 0xdf, 0x36, 0x1c, 0xde, 0x2e, 0x32, 0x68, 0x21, 0x67,
+	0x28, 0x45, 0x91, 0x97, 0xd9, 0x51, 0x14, 0xf0, 0xc3, 0x28, 0xe1, 0xdd, 0x4f, 0x71, 0x7f, 0xe8,
+	0x00, 0xda, 0x7f, 0xc2, 0xc8, 0x97, 0x3f, 0x02, 0x00, 0x00, 0xff, 0xff, 0x23, 0x9c, 0xbf, 0x35,
+	0x14, 0x04, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -264,6 +393,7 @@ const _ = grpc.SupportPackageIsVersion4
 type MsgClient interface {
 	EnableEthAddress(ctx context.Context, in *MsgEnableEthAddress, opts ...grpc.CallOption) (*MsgEnableEthAddressResponse, error)
 	DisableEthAddress(ctx context.Context, in *MsgDisableEthAddress, opts ...grpc.CallOption) (*MsgDisableEthAddressResponse, error)
+	SaveEthereumAddressState(ctx context.Context, in *MsgSaveEthereumAddressState, opts ...grpc.CallOption) (*MsgSaveEthereumAddressStateResponse, error)
 }
 
 type msgClient struct {
@@ -292,10 +422,20 @@ func (c *msgClient) DisableEthAddress(ctx context.Context, in *MsgDisableEthAddr
 	return out, nil
 }
 
+func (c *msgClient) SaveEthereumAddressState(ctx context.Context, in *MsgSaveEthereumAddressState, opts ...grpc.CallOption) (*MsgSaveEthereumAddressStateResponse, error) {
+	out := new(MsgSaveEthereumAddressStateResponse)
+	err := c.cc.Invoke(ctx, "/etherstate.etherstate.Msg/SaveEthereumAddressState", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 type MsgServer interface {
 	EnableEthAddress(context.Context, *MsgEnableEthAddress) (*MsgEnableEthAddressResponse, error)
 	DisableEthAddress(context.Context, *MsgDisableEthAddress) (*MsgDisableEthAddressResponse, error)
+	SaveEthereumAddressState(context.Context, *MsgSaveEthereumAddressState) (*MsgSaveEthereumAddressStateResponse, error)
 }
 
 // UnimplementedMsgServer can be embedded to have forward compatible implementations.
@@ -307,6 +447,9 @@ func (*UnimplementedMsgServer) EnableEthAddress(ctx context.Context, req *MsgEna
 }
 func (*UnimplementedMsgServer) DisableEthAddress(ctx context.Context, req *MsgDisableEthAddress) (*MsgDisableEthAddressResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DisableEthAddress not implemented")
+}
+func (*UnimplementedMsgServer) SaveEthereumAddressState(ctx context.Context, req *MsgSaveEthereumAddressState) (*MsgSaveEthereumAddressStateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SaveEthereumAddressState not implemented")
 }
 
 func RegisterMsgServer(s grpc1.Server, srv MsgServer) {
@@ -349,6 +492,24 @@ func _Msg_DisableEthAddress_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_SaveEthereumAddressState_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgSaveEthereumAddressState)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).SaveEthereumAddressState(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/etherstate.etherstate.Msg/SaveEthereumAddressState",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).SaveEthereumAddressState(ctx, req.(*MsgSaveEthereumAddressState))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Msg_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "etherstate.etherstate.Msg",
 	HandlerType: (*MsgServer)(nil),
@@ -360,6 +521,10 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DisableEthAddress",
 			Handler:    _Msg_DisableEthAddress_Handler,
+		},
+		{
+			MethodName: "SaveEthereumAddressState",
+			Handler:    _Msg_SaveEthereumAddressState_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -506,6 +671,91 @@ func (m *MsgDisableEthAddressResponse) MarshalToSizedBuffer(dAtA []byte) (int, e
 	return len(dAtA) - i, nil
 }
 
+func (m *MsgSaveEthereumAddressState) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgSaveEthereumAddressState) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgSaveEthereumAddressState) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.StoragePosition != 0 {
+		i = encodeVarintTx(dAtA, i, uint64(m.StoragePosition))
+		i--
+		dAtA[i] = 0x28
+	}
+	if m.Nonce != 0 {
+		i = encodeVarintTx(dAtA, i, uint64(m.Nonce))
+		i--
+		dAtA[i] = 0x20
+	}
+	if m.BlockNumber != 0 {
+		i = encodeVarintTx(dAtA, i, uint64(m.BlockNumber))
+		i--
+		dAtA[i] = 0x18
+	}
+	if len(m.Address) > 0 {
+		i -= len(m.Address)
+		copy(dAtA[i:], m.Address)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Address)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Creator) > 0 {
+		i -= len(m.Creator)
+		copy(dAtA[i:], m.Creator)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgSaveEthereumAddressStateResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgSaveEthereumAddressStateResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgSaveEthereumAddressStateResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Success {
+		i--
+		if m.Success {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintTx(dAtA []byte, offset int, v uint64) int {
 	offset -= sovTx(v)
 	base := offset
@@ -564,6 +814,44 @@ func (m *MsgDisableEthAddress) Size() (n int) {
 }
 
 func (m *MsgDisableEthAddressResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Success {
+		n += 2
+	}
+	return n
+}
+
+func (m *MsgSaveEthereumAddressState) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Creator)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Address)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	if m.BlockNumber != 0 {
+		n += 1 + sovTx(uint64(m.BlockNumber))
+	}
+	if m.Nonce != 0 {
+		n += 1 + sovTx(uint64(m.Nonce))
+	}
+	if m.StoragePosition != 0 {
+		n += 1 + sovTx(uint64(m.StoragePosition))
+	}
+	return n
+}
+
+func (m *MsgSaveEthereumAddressStateResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -906,6 +1194,247 @@ func (m *MsgDisableEthAddressResponse) Unmarshal(dAtA []byte) error {
 		}
 		if fieldNum <= 0 {
 			return fmt.Errorf("proto: MsgDisableEthAddressResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Success", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Success = bool(v != 0)
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgSaveEthereumAddressState) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgSaveEthereumAddressState: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgSaveEthereumAddressState: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Creator = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Address = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field BlockNumber", wireType)
+			}
+			m.BlockNumber = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.BlockNumber |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 4:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Nonce", wireType)
+			}
+			m.Nonce = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Nonce |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 5:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field StoragePosition", wireType)
+			}
+			m.StoragePosition = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.StoragePosition |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgSaveEthereumAddressStateResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgSaveEthereumAddressStateResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgSaveEthereumAddressStateResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
