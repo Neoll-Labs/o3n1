@@ -23,6 +23,8 @@ type Client interface {
 	EnableEthereumAddress(ctx context.Context, accountName, address string) error
 	DisableEthereumAddress(ctx context.Context, accountName, address string) error
 	SaveEthereumAddressState(ctx context.Context, accountName, address string, blockNumber, nonce, storagePosition uint64) error
+	QueryAllEthereumAddressState(ctx context.Context) (*[]types2.EthereumAddressState, error)
+	QueryEthereumAddressState(ctx context.Context, address string) (*types2.EthereumAddressState, error)
 	QueryAllEthereumAddress(ctx context.Context) ([]types2.EthereumAddress, error)
 	QueryEthereumAddress(ctx context.Context, address string) (*types2.EthereumAddress, error)
 }
@@ -30,7 +32,6 @@ type Client interface {
 var _ Client = (*etherStateClient)(nil)
 
 func NewEtherStateClient(ctx context.Context) etherStateClient {
-
 	return etherStateClient{
 		c: createClient(ctx),
 	}
@@ -81,6 +82,26 @@ func (c etherStateClient) QueryEthereumAddress(ctx context.Context, address stri
 	}
 
 	return &all.EthereumAddress, nil
+}
+
+func (c etherStateClient) QueryAllEthereumAddressState(ctx context.Context) (*[]types2.EthereumAddressState, error) {
+	queryClient := types2.NewQueryClient(c.c.Context())
+	all, err := queryClient.EthereumAddressStateAll(ctx, &types2.QueryAllEthereumAddressStateRequest{})
+	if err != nil {
+		return nil, err
+	}
+	return &all.EthereumAddressState, err
+}
+
+func (c etherStateClient) QueryEthereumAddressState(ctx context.Context, address string) (*types2.EthereumAddressState, error) {
+	queryClient := types2.NewQueryClient(c.c.Context())
+
+	all, err := queryClient.EthereumAddressState(ctx, &types2.QueryGetEthereumAddressStateRequest{Index: address})
+	if err != nil {
+		return nil, err
+	}
+
+	return &all.EthereumAddressState, nil
 }
 
 func (c etherStateClient) SaveEthereumAddressState(ctx context.Context, accountName, address string, blocknumber, nonce, storagePosition uint64) error {
