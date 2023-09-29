@@ -2,7 +2,7 @@
  license x
 */
 
-package gateway
+package infura
 
 import (
 	"bytes"
@@ -42,7 +42,7 @@ var (
 	ErrInfuraErrorResponse = errors.New("infura return error")
 )
 
-func GetEthLastBlock() (float32, string, error) {
+func GetEthLastBlock() (int64, string, error) {
 	response, err := rpcCall("eth_blockNumber", nil)
 	if err != nil {
 		return 0, "", ErrInfuraCall
@@ -50,7 +50,7 @@ func GetEthLastBlock() (float32, string, error) {
 
 	blockNumber := new(big.Int)
 	blockNumber.SetString(response.Result[2:], 16)
-	return float32(blockNumber.Int64()), response.Result, nil
+	return blockNumber.Int64(), response.Result, nil
 }
 
 func GetTransactionCount(ethAddress, blockNumber string) (int, error) {

@@ -1,4 +1,4 @@
-package gateway
+package infura
 
 import (
 	"github.com/stretchr/testify/assert"

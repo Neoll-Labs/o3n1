@@ -1,4 +1,4 @@
-module github.com/nelsonstr/o3n1/ether-state/client
+module github.com/nelsonstr/o3n1/ether-state/relayer
 
 go 1.21.1
 
