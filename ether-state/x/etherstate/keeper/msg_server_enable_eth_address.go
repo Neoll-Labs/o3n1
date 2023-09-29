@@ -11,20 +11,24 @@ import (
 func (k msgServer) EnableEthAddress(goCtx context.Context, msg *types.MsgEnableEthAddress) (*types.MsgEnableEthAddressResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	// DONE: ✓ Handling the message
+	newActiveState := true
 
 	eth, exists := k.Keeper.GetEthereumAddress(ctx, msg.Address)
-	if exists && eth.Active {
-		return &types.MsgEnableEthAddressResponse{Success: false},
-			errors.Wrapf(types.ErrEthereumAddressAlreadyOnRequiredState, "ethereum address (%s) already enabled.", msg.Address)
+	if exists {
+		if newActiveState == eth.Active {
+			return nil,
+				errors.Wrapf(types.ErrEthereumAddressAlreadyOnRequiredState, "ethereum address (%s) already enabled.", msg.Address)
+		}
 	}
 
 	k.Keeper.SetEthereumAddress(ctx, types.EthereumAddress{
 		Index:  msg.Address,
-		Active: true,
+		Active: newActiveState,
 	})
 
-	ctx.EventManager().EmitTypedEvent(msg)
-
+	err := ctx.EventManager().EmitTypedEvent(msg)
+	if err != nil {
+		return nil, err
+	}
 	return &types.MsgEnableEthAddressResponse{Success: true}, nil
 }
