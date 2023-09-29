@@ -148,19 +148,19 @@ ignite scaffold message save-ethereum-address-state address blockNumber:uint non
 go build -o ether-state cmd/ether-stated/main.go
 
 # enable an address
-./ether-state tx etherstate enable-eth-address 0xe8aCaaB95d1102D099F82F03f6106289ee19abA8  --from cosmos1e9fs4dqkdheaa9xvujgn0vxux5a2ux3ysdp5vn --gas auto  
+./ether-state tx etherstate enable-eth-address 0xe8aCaaB95d1102D099F82F03f6106289ee19abA8  --from cosmos1g5u6nm433jwpa2advpzrp80xpesnw3am3fxfek --gas auto  
 
 # save state
-./ether-state tx etherstate save-ethereum-address-state  0xe8aCaaB95d1102D099F82F03f6106289ee19abA8 10 10 10 --from cosmos1e9fs4dqkdheaa9xvujgn0vxux5a2ux3ysdp5vn --gas auto
+./ether-state tx etherstate save-ethereum-address-state  0xe8aCaaB95d1102D099F82F03f6106289ee19abA8 10 10 10 --from cosmos1g5u6nm433jwpa2advpzrp80xpesnw3am3fxfek --gas auto
 ./ether-state query etherstate show-ethereum-address-state  0xe8aCaaB95d1102D099F82F03f6106289ee19abA8
 
 
 # enable an address
-./ether-state tx etherstate enable-eth-address 0xe8aCaaB95d1102D099F82F03f6106289ee19abA1  --from cosmos1e9fs4dqkdheaa9xvujgn0vxux5a2ux3ysdp5vn --gas auto  
+./ether-state tx etherstate enable-eth-address 0xe8aCaaB95d1102D099F82F03f6106289ee19abA1  --from cosmos1g5u6nm433jwpa2advpzrp80xpesnw3am3fxfek --gas auto  
 
 # save state
-./ether-state tx etherstate save-ethereum-address-state  0xe8aCaaB95d1102D099F82F03f6106289ee19abA1 0 0 0 --from cosmos1e9fs4dqkdheaa9xvujgn0vxux5a2ux3ysdp5vn --gas auto
-./ether-state query etherstate show-ethereum-address-state  cosmos1e9fs4dqkdheaa9xvujgn0vxux5a2ux3ysdp5vn
+./ether-state tx etherstate save-ethereum-address-state  0xe8aCaaB95d1102D099F82F03f6106289ee19abA1 0 0 0 --from cosmos1g5u6nm433jwpa2advpzrp80xpesnw3am3fxfek --gas auto
+./ether-state query etherstate show-ethereum-address-state  0xe8aCaaB95d1102D099F82F03f6106289ee19abA1
 
 # list all 
 ./ether-state query etherstate list-ethereum-address-state
