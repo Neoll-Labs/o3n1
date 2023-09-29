@@ -86,7 +86,7 @@ ignite generate ts-client
 
 cd ether-state
 
-ignite chain serve 
+ignite chain serve -v
 ignite chain debug --server --server-address 127.0.0.1:30500
 
 ```
@@ -169,5 +169,21 @@ go build -o ether-state cmd/ether-stated/main.go
 
 Connect to websocket server   
 ```shell
-wscat -c ws://127.0.0.1:26657/websocket
+wscat -c ws://localhost:26657/websocket
+
+
+	wscat -c ws://localhost:26657/websocket 
+	
+	{ "jsonrpc": "2.0", "method": "subscribe", "id": 0, "params": {"query": "tm.event = 'Tx'"}}
+	{ "jsonrpc": "2.0", "method": "subscribe", "id": 1, "params": ["tm.event='NewBlock'"] }
+	{ "jsonrpc": "2.0", "method": "subscribe", "id": 1, "params": ["tm.event='Tx'"] }
+ 
+ 
+{"jsonrpc": "2.0","method": "subscribe", "id": 0,"params": {"query": "message.module = 'etherstate'"}}
+ 
+
+
+{"jsonrpc": "2.0","method": "subscribe", "id": 0,"params": {"query": "message.action = '/etherstate.etherstate.MsgEnableEthAddress'"}}
+{"jsonrpc": "2.0","method": "subscribe", "id": 0,"params": {"query": "message.action = '/etherstate.etherstate.MsgDisableEthAddress'"}}
+ 
 ```
