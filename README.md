@@ -23,6 +23,7 @@ it should be stored on your blockchain along with any necessary metadata that ca
 
 ```mermaid
 classDiagram
+
 class ethereum-address{
     index address
     boolean enable
