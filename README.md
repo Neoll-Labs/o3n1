@@ -23,28 +23,27 @@ it should be stored on your blockchain along with any necessary metadata that ca
 
 ```mermaid
 classDiagram
+ 
+class ethereumAddress{
+index address
+boolean enable
 
-class ethereum-address{
-    index address
-    boolean enable
-    
-    QueryAllEthereumAddress()
-    QueryEthereumAddress(address)
-    
-    EnableEthereumAddress()
-    DisableEthereumAddress()
+QueryAllEthereumAddress()
+QueryEthereumAddress(address)
+
+EnableEthereumAddress()
+DisableEthereumAddress()
 }
 
-class ethereum-address-state  {
-    index address
-    int state
-    int nonce
-    int blocknumber
-    
-    QueryAllEthereumAddressState()
-    QueryEthereumAddressState(address)
-    
-    SaveEthereumAddressState()
+class ethereumAddressState  {
+index address
+int state
+int nonce
+int blocknumber
+
+QueryAllEthereumAddressState()
+QueryEthereumAddressState(address)
+SaveEthereumAddressState()
 }
 ```
 
