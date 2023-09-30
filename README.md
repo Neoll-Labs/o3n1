@@ -17,30 +17,121 @@ it should be stored on your blockchain along with any necessary metadata that ca
 * Users should be able to read data this from your blockchain.
 
 
+# architecture
+
+* Maps, attributes e messages
+```mermaid
+classDiagram
+class ethereum-address{
+    index address
+    boolean enable
+    
+    QueryAllEthereumAddress()
+    QueryEthereumAddress(address)
+    
+    EnableEthereumAddress()
+    DisableEthereumAddress()
+}
+
+class ethereum-address-state  {
+    index address
+    int state
+    int nonce
+    int blocknumber
+    
+    QueryAllEthereumAddressState()
+    QueryEthereumAddressState(address)
+    
+    SaveEthereumAddressState()
+}
+```
+
+
+```mermaid
+sequenceDiagram
+Alice->>BC: Register an Ethereum address
+loop realayer
+    relayer->>Eth: GetLatestBlockNumber
+    relayer->>Eth: GetNonce
+    relayer->>Eth: GetStorageAt
+    relayer->>BC: Store the state
+end
+Alice-->>BC: Check the Ethereum Address State
+Alice-->>BC: Disable Ethereum Address monitoring
+```
 
 
 
 ## features
 
-* register Ethereum addresses for monitoring
-  * create a map of addresses and boolean
-  * create update read eth address
+* create map Ethereum addresses (index) and the monitoring status(boolean)
 
-* suspend the Ethereum address monitoring
+* enable Ethereum address monitoring and create event
+
+* disable Ethereum address monitoring and create event
+
+* Get Ethereum address and the monitoring status
+
+* List Ethereum addresses and monitoring status
+
+* create map Ethereum addresses (index), nonce block number and state
 
 * Save Ethereum *address storage position* (state) with the block number and nonce
 
 * Get Ethereum state from blockchain
-  * query 
 
-* List all Ethereum addresses enabled
+* List Ethereum states for addresses
 
-  * relayer
-    * listening the changes on the ethereum address 
-      * on change subscrive event on ethereum 
-        ```shell
-          wscat -c wss://mainnet.infura.io/ws/v3/YOUR-API-KEY > {"jsonrpc":  "2.0",  "id":  1,  "method":  "eth_subscribe",  "params":  ["newHeads"]}
-        ```
+
+# Components
+
+## Blockchain
+
+The Blockchain server, map and messages were created using ignite.
+Is the main component where the state is stored as the address to monitor.
+
+Every time an address is changed to be monitored or not monitored, it creates an event.
+
+The blockchain is at ./ether-state
+
+
+## Relayer
+
+The Relayer is responsible for sending the state to the blockchain.
+It gets the data from the Ethereum blockchain and stores it in the state.
+
+During the start, the Relayer get all address from the blockchain and enable the monitor if is enabled.
+
+Every time the Address monitoring is changed is generated and event in the blockchain.
+
+The Relayer is listening to the events for `MsgEnableEthAddress` and `MsgDisableEthAddress`, and updates the list of addresses to monitor.
+The WebSocket client used was the `gorilla`, since the Tendermint was not working (the development was done at windows+wsl)
+
+The status is updated every 10 Secondd(similar to the block time).
+
+The Relayer is at ./relayer
+
+
+# future improvements
+* The Relayer could be listing events from Ethereum to check when the address is changed.
+    * This reduces a lot the amount of requests to Infura and the number of state/blockNumber/nonce updates.
+* Validate the address is from smart contract.
+    * Validating from the blockchain could create some side effects
+    * The relayer could add a stamp to the address
+* Create more tests (unit,integration,cornercase) 
+* Create configurations for differents environments
+
+
+# main code 
+## blockchain
+[msg_server_disable_eth_address.go](ether-state/x/etherstate/keeper/msg_server_disable_eth_address.go)
+[msg_server_enable_eth_address.go](ether-state/x/etherstate/keeper/msg_server_enable_eth_address.go)
+
+[msg_server_save_ethereum_address_state.go](ether-state/x/etherstate/keeper/msg_server_save_ethereum_address_state.go)
+
+[errors.go](ether-state/x/etherstate/types/errors.go)
+
+[Relayer](./relayer/main.go)
 
 
 # required tools
@@ -76,7 +167,7 @@ expected output
 ```
 
 
-# cms ignite boilerplate
+# used commands for ignite boilerplate
 
 ```shell
 
@@ -86,15 +177,15 @@ ignite generate ts-client
 
 cd ether-state
 
+# start with `hot deploy`
 ignite chain serve -v
+
+# start in debug mode
 ignite chain debug --server --server-address 127.0.0.1:30500
 
 ```
 
-http://localhost:1317/
-
 ```shell
-
 # create map for ethereum addresses and 
 
 # eth address is the index
@@ -108,13 +199,18 @@ ignite scaffold message enable-eth-address  address --response success:bool --mo
 ignite scaffold message disable-eth-address address --response success:bool --module ether-state
 
 
+ignite scaffold map ethereum-address-state state:uint block:uint nonce:uint --index index --module ether-state --no-message
 ```
 
-### command line to enable / disable the address
+### command to create the scaffold
+
+* create map for monitoring status
+
 ```shell
 go build -o ether-state cmd/ether-stated/main.go
 
 ./ether-state query etherstate list-ethereum-address
+./ether-state query etherstate list-ethereum-address-state
 
 ./ether-state tx etherstate enable-eth-address 0xe8aCaaB95d1102D099F82F03f6106289ee19abA8  --from cosmos10wtz2ckpzzgek0n4w4mpy4mrrnpwu3zx6nxm32 --gas auto  
 ./ether-state query etherstate show-ethereum-address  0xe8aCaaB95d1102D099F82F03f6106289ee19abA8
@@ -122,12 +218,9 @@ go build -o ether-state cmd/ether-stated/main.go
 ./ether-state tx etherstate disable-eth-address 0xe8aCaaB95d1102D099F82F03f6106289ee19abA8  --from cosmos10wtz2ckpzzgek0n4w4mpy4mrrnpwu3zx6nxm32 --gas auto  
 ./ether-state query etherstate show-ethereum-address  0xe8aCaaB95d1102D099F82F03f6106289ee19abA8
 
-
-./ether-state query etherstate list-ethereum-address-state
-
 ```
 
-## save state
+* create map to save the state 
 
 ```shell
 # eth address is the index
@@ -136,10 +229,13 @@ ignite scaffold map ethereum-address-state state:uint blockNumber:uint nonce:uin
     --module ether-state \
     --no-message
 
+```
+
+* create message to store the address state
+```shell
 ignite scaffold message save-ethereum-address-state address blockNumber:uint nonce:uint storage-position:uint \
     --response success:bool \
     --module ether-state
-
 ```
 
 ### command save state of ethereum address
@@ -147,43 +243,51 @@ ignite scaffold message save-ethereum-address-state address blockNumber:uint non
 # build
 go build -o ether-state cmd/ether-stated/main.go
 
-# enable an address
+```
+
+* command line to enable an address
+```
 ./ether-state tx etherstate enable-eth-address 0xe8aCaaB95d1102D099F82F03f6106289ee19abA8  --from cosmos1g5u6nm433jwpa2advpzrp80xpesnw3am3fxfek --gas auto  
 
+```
+
+* command line to save the state and query for and address
+```
 # save state
-./ether-state tx etherstate save-ethereum-address-state  0xe8aCaaB95d1102D099F82F03f6106289ee19abA8 10 10 10 --from cosmos1g5u6nm433jwpa2advpzrp80xpesnw3am3fxfek --gas auto
+./ether-state tx etherstate save-ethereum-address-state  0x3fC91A3afd70395Cd496C647d5a6CC9D4B2b7FAD 10 10 10 --from cosmos1g5u6nm433jwpa2advpzrp80xpesnw3am3fxfek --gas auto
 ./ether-state query etherstate show-ethereum-address-state  0xe8aCaaB95d1102D099F82F03f6106289ee19abA8
 
+```
 
-# enable an address
-./ether-state tx etherstate enable-eth-address 0xe8aCaaB95d1102D099F82F03f6106289ee19abA1  --from cosmos1g5u6nm433jwpa2advpzrp80xpesnw3am3fxfek --gas auto  
-
-# save state
-./ether-state tx etherstate save-ethereum-address-state  0xe8aCaaB95d1102D099F82F03f6106289ee19abA1 0 0 0 --from cosmos1g5u6nm433jwpa2advpzrp80xpesnw3am3fxfek --gas auto
-./ether-state query etherstate show-ethereum-address-state  0xe8aCaaB95d1102D099F82F03f6106289ee19abA1
-
+* command line list the data for all address
+```
 # list all 
-./ether-state query etherstate list-ethereum-address-state
+./ether-state query etherstate list-ethereum-address
 
+./ether-state query etherstate list-ethereum-address-state
+```
+
+* command line show the data for one address
+```shell
+
+./ether-state query etherstate show-ethereum-address 0x3fC91A3afd70395Cd496C647d5a6CC9D4B2b7FAD
+
+./ether-state query etherstate show-ethereum-address-state 0x3fC91A3afd70395Cd496C647d5a6CC9D4B2b7FAD
 ```
 
 Connect to websocket server   
 ```shell
 wscat -c ws://localhost:26657/websocket
 
+{ "jsonrpc": "2.0", "method": "subscribe", "id": 0, "params": {"query": "tm.event = 'Tx'"}} 
 
-	wscat -c ws://localhost:26657/websocket 
-	
-	{ "jsonrpc": "2.0", "method": "subscribe", "id": 0, "params": {"query": "tm.event = 'Tx'"}}
-	{ "jsonrpc": "2.0", "method": "subscribe", "id": 1, "params": ["tm.event='NewBlock'"] }
-	{ "jsonrpc": "2.0", "method": "subscribe", "id": 1, "params": ["tm.event='Tx'"] }
- 
- 
+
 {"jsonrpc": "2.0","method": "subscribe", "id": 0,"params": {"query": "message.module = 'etherstate'"}}
- 
 
 
 {"jsonrpc": "2.0","method": "subscribe", "id": 0,"params": {"query": "message.action = '/etherstate.etherstate.MsgEnableEthAddress'"}}
 {"jsonrpc": "2.0","method": "subscribe", "id": 0,"params": {"query": "message.action = '/etherstate.etherstate.MsgDisableEthAddress'"}}
  
 ```
+
+API endpoint  http://localhost:1317/
