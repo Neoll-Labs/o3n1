@@ -22,7 +22,6 @@ it should be stored on your blockchain along with any necessary metadata that ca
 * Maps, attributes e messages
 
 ```mermaid
-
 classDiagram
 class ethereum-address{
     index address
@@ -46,7 +45,6 @@ class ethereum-address-state  {
     
     SaveEthereumAddressState()
 }
-
 ```
 
 
