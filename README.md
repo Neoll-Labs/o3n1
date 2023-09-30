@@ -20,7 +20,9 @@ it should be stored on your blockchain along with any necessary metadata that ca
 # architecture
 
 * Maps, attributes e messages
+
 ```mermaid
+
 classDiagram
 class ethereum-address{
     index address
@@ -44,6 +46,7 @@ class ethereum-address-state  {
     
     SaveEthereumAddressState()
 }
+
 ```
 
 
@@ -118,9 +121,17 @@ The Relayer is at ./relayer
 * Validate the address is from smart contract.
     * Validating from the blockchain could create some side effects
     * The relayer could add a stamp to the address
-* Create more tests (unit,integration,cornercase) 
+* Blockchain attack
+* Request code auditing
+* replace gorilla by Tendermint websocket
+* Create CI/CD
 * Create configurations for differents environments
-
+* Create more tests (unit,integration,performane, cornercase),
+* Run Linters 
+* create quality gates
+* containarization of blockchain and relayer
+* CI/CD bots to notify for update dependencies and vulnerabilities
+* 
 
 # main code 
 ## blockchain
@@ -131,6 +142,7 @@ The Relayer is at ./relayer
 
 [errors.go](ether-state/x/etherstate/types/errors.go)
 
+## Relayer
 [Relayer](./relayer/main.go)
 
 
