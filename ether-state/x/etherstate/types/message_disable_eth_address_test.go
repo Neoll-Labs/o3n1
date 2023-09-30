@@ -35,7 +35,6 @@ func TestMsgDisableEthAddress_ValidateBasic(t *testing.T) {
 				Creator: sample.AccAddress(),
 				Address: "0xAAAcE30a1329520a24c6B569ea57989ffa90086A",
 			},
-			err: ErrInvalidEthereumAddress,
 		},
 	}
 	for _, tt := range tests {

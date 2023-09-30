@@ -11,14 +11,16 @@ import (
 func (k msgServer) SaveEthereumAddressState(goCtx context.Context, msg *types.MsgSaveEthereumAddressState) (*types.MsgSaveEthereumAddressStateResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	// TODO: Handling the message
-
 	eth, exists := k.Keeper.GetEthereumAddress(ctx, msg.Address)
-	if !exists || !eth.Active {
-		return &types.MsgSaveEthereumAddressStateResponse{Success: false}, nil
+	if exists {
+		if !eth.Active {
+			return &types.MsgSaveEthereumAddressStateResponse{Success: false},
+				errors.Wrapf(types.ErrEthereumAddressDisabled, "ethereum address disabled (%v)", msg.Address)
+		}
+	} else {
+		return &types.MsgSaveEthereumAddressStateResponse{Success: false},
+			errors.Wrapf(types.ErrEthereumAddressNotRegistered, "ethereum address not registered (%v)", msg.Address)
 	}
-
-	//TODO: validate the blocknumber, nonce
 
 	previousState, exists := k.Keeper.GetEthereumAddressState(ctx, msg.Address)
 	if exists {

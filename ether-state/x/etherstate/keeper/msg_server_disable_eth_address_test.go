@@ -1,9 +1,11 @@
 package keeper_test
 
 import (
+	"errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/nelsonstr/o3n1/ether-state/testutil/sample"
 	"github.com/nelsonstr/o3n1/ether-state/x/etherstate/types"
+	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
 )
@@ -28,4 +30,11 @@ func Test_msgServer_DisableEthAddress(t *testing.T) {
 			{Key: "creator", Value: "\"" + alice + "\""},
 		},
 	}, event)
+
+	_, err := msgSrvr.DisableEthAddress(context, &types.MsgDisableEthAddress{
+		Creator: alice,
+		Address: address,
+	})
+	assert.NotNil(t, err)
+	assert.True(t, errors.Is(err, types.ErrEthereumAddressAlreadyOnRequiredState))
 }
