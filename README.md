@@ -133,6 +133,7 @@ The Relayer is at ./relayer
 * containarization of blockchain and relayer
 * CI/CD bots to notify for update dependencies and vulnerabilities
 * analize the relayer integrated with the blockchain
+* Analyze the monetize strategy for the blockchain
 
 # main code 
 ## blockchain
