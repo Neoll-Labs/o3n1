@@ -31,8 +31,8 @@ boolean enable
 QueryAllEthereumAddress()
 QueryEthereumAddress(address)
 
-EnableEthereumAddress()
-DisableEthereumAddress()
+EnableEthereumAddress(address)
+DisableEthereumAddress(address)
 }
 
 class ethereumAddressState  {
@@ -43,7 +43,7 @@ int blocknumber
 
 QueryAllEthereumAddressState()
 QueryEthereumAddressState(address)
-SaveEthereumAddressState()
+SaveEthereumAddressState(address, nonce, blocknumber, state)
 }
 ```
 
@@ -132,7 +132,7 @@ The Relayer is at ./relayer
 * create quality gates
 * containarization of blockchain and relayer
 * CI/CD bots to notify for update dependencies and vulnerabilities
-* 
+* analize the relayer integrated with the blockchain
 
 # main code 
 ## blockchain
@@ -303,4 +303,30 @@ wscat -c ws://localhost:26657/websocket
  
 ```
 
-API endpoint  http://localhost:1317/
+OpenAPI documentation  http://localhost:1317/
+
+Start local blockchain
+```shell
+cd ether-state
+ignite chain serve
+```
+
+Start relayer server
+```shell
+cd relayer
+go run .
+```
+
+*  Get some Ethereum state stored on your chain
+
+```shell
+./ether-state tx etherstate enable-eth-address 0xe8aCaaB95d1102D099F82F03f6106289ee19abA8  --from cosmos10wtz2ckpzzgek0n4w4mpy4mrrnpwu3zx6nxm32 --gas auto  
+
+```
+* Query that storage
+
+Requires the Relayer running to store the state
+```shell
+
+./ether-state query etherstate show-ethereum-address-state  0xe8aCaaB95d1102D099F82F03f6106289ee19abA8
+```
