@@ -47,10 +47,12 @@ class ethereum-address-state  {
 }
 ```
 
+* Sequence diagram
 
 ```mermaid
 sequenceDiagram
 Alice->>BC: Register an Ethereum address
+relayer-->>BC: websocket (events)
 loop realayer
     relayer->>Eth: GetLatestBlockNumber
     relayer->>Eth: GetNonce
@@ -59,6 +61,7 @@ loop realayer
 end
 Alice-->>BC: Check the Ethereum Address State
 Alice-->>BC: Disable Ethereum Address monitoring
+
 ```
 
 
